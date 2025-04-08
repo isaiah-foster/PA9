@@ -1,10 +1,11 @@
-# Visual Studio Community 2022 Project Setup
+# PA9 Project Setup In VSC2022
 
 This project provides a fully prepared Visual Studio Community 2022 solution, along with a pre-configured Git repository. To get started, simply download the zipped project folder and open it in Visual Studio.
 
 ## Prerequisites
 - Visual Studio Community 2022 (or a compatible edition)
 - Git installed on your machine
+- [Click here to view PA9 assignment PDF](https://eecs.wsu.edu/~aofallon/cpts122/progassignments/PA9.pdf)
 
 ## Setup Instructions
 1. **Download the Project**  
