@@ -22,5 +22,5 @@ This project provides a fully prepared Visual Studio Community 2022 solution, al
    - The **Git Changes** window: it should display pending changes if any.
    - The **Remote Origin**: run `git remote -v` in the terminal (accessible via **View > Terminal**) to confirm the repository’s URL.
 
-4. **Start Developing**  
-   You’re ready to push, pull, and collaborate. Since the folder is already initialized as a Git repository and connected to a remote, you can use all standard Git commands right away.
+4. **Test Starter Code**  
+   Run the program to test if it works. It should pop up a green circle
