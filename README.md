@@ -5,7 +5,7 @@ This project provides a fully prepared Visual Studio Community 2022 solution, al
 ## Prerequisites
 - Visual Studio Community 2022 (or a compatible edition)
 - Git installed on your machine
-- SFML 3.0.0 installed to local disk (C:\SFML-3.0.0)[Click here](https://www.sfml-dev.org/files/SFML-3.0.0-windows-vc17-64-bit.zip)
+- SFML 3.0.0 installed to local disk (C:\SFML-3.0.0) [Click here](https://www.sfml-dev.org/files/SFML-3.0.0-windows-vc17-64-bit.zip)
 - [Click here to view PA9 assignment PDF](https://eecs.wsu.edu/~aofallon/cpts122/progassignments/PA9.pdf)
 
 ## Setup Instructions
