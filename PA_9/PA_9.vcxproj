@@ -198,7 +198,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PA_9.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Z:\Downloads\PlayerShip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="menu.hpp" />
+    <ClInclude Include="playerShip.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
