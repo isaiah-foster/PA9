@@ -16,11 +16,12 @@ This project provides a fully prepared Visual Studio Community 2022 solution, al
 
 2. **Open the Project**  
    Open Visual Studio and select **File > Open > Project/Solution**. Navigate to the unzipped folder and open the `.sln` file to load the solution.
+   Under tools, open a developer powershell or command line and run `git pull`
 
-3. **Confirm Git Configuration**  
+4. **Confirm Git Configuration**  
    Once the project is open, verify that the Git repository is already set up by checking:
    - The **Git Changes** window: it should display pending changes if any.
    - The **Remote Origin**: run `git remote -v` in the terminal (accessible via **View > Terminal**) to confirm the repository’s URL.
 
-4. **Test Starter Code**  
+5. **Test Starter Code**  
    Run the program to test if it works. It should pop up a green circle
