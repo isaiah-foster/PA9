@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "menu.hpp"
-#include "playerShip.hpp"
+#include "player.hpp"
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
 
     sf::Texture shipTexture;
     shipTexture.loadFromFile("player_ship.png");
-	PlayerShip playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
+	player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
 
 
     while (window.isOpen())
@@ -26,8 +26,6 @@ int main()
 
 
         }
-
-
 
         window.clear();
         window.draw(playerShip);
