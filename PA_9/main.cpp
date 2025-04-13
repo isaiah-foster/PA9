@@ -13,8 +13,8 @@ int main()
 
 
     sf::Texture shipTexture;
-    shipTexture.loadFromFile("player_ship.png");
-	player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
+    shipTexture.loadFromFile("PlayerShip.png");
+	Player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
 
 
     while (window.isOpen())
@@ -24,12 +24,16 @@ int main()
             if (event->is<sf::Event::Closed>())
                 window.close();
 
-
         }
 
         window.clear();
         window.draw(playerShip);
         window.display();
+
+        playerShip.movePlayer(window);
+
+        
+
 
     }
 }
