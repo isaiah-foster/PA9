@@ -1,49 +1,126 @@
-﻿class Player : public sf::Sprite {
+﻿#include <SFML/Audio.hpp>
+
+class Player : public sf::Sprite 
+{
 public:
-    // Constructor that initializes the player with a texture and an optional position
-    Player(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f })
-        : sf::Sprite(texture), speed(3.0f)
+
+    float original_yaxis;
+    bool respawn = false;
+    float original_xaxis;
+
+    
+
+    //constructor that initializes the player with a texture and an optional position
+    Player(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f }, bool isSpaceShip = true)
+        : sf::Sprite(texture), speed(3.0f), original_yaxis(position.y), original_xaxis(position.x)
     {
         setPosition(position);
         setScale({ 0.1f, 0.1f });  // Adjust scale as needed
+
+
     }
 
-    // Function to move the player based on keyboard input and window size
-    void movePlayer(const sf::RenderWindow& window)
+
+
+    //constructor creates a pencil using the player class
+    Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = false, sf::Vector2f position = { 0.f, 0.f }) :
+        sf::Sprite(texture), speed(10.0f)
     {
-        sf::Vector2f movement(0.f, 0.f); // Variable to track movement
+        position = getPosition();
 
-        sf::Vector2u windowSize = window.getSize(); // Get the window size
 
-        // Get the current position of the player
+    }
+
+
+
+    //respawning pencil constructor
+    /*Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = true, sf::Vector2f position = { 0.f, 0.f }) :
+        sf::Sprite(texture), speed(10.0f)
+    {
+        position = getPosition();
+
+
+    }*/
+
+
+
+    // Function to move the player based on keyboard input and window size
+    void playerActions(const sf::RenderWindow& window, sf::Music& laserSound , bool isSpaceShip)
+    {
+
+        sf::Vector2f movement(0.f, 0.f); //variable to track movement
+
+
+        sf::Vector2f savePencilLoco = movement;//track pencil ocation
+
+
+        sf::Vector2u windowSize = window.getSize(); //get the window size
+
+        
+        //get the current position of the player
         sf::Vector2f playerPosition = getPosition();
-
-        // Prevent player from moving outside the bounds of the window (invisible box)
-        // Move Left
+        
+        //move left
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && playerPosition.x > 0)
             movement.x -= speed;
 
-        // Move Right
+        //move right
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && playerPosition.x < windowSize.x - getTexture().getSize().x * getScale().x)
             movement.x += speed;
 
-        // Move Up
+        //move up
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && playerPosition.y > 700)
             movement.y -= speed;
 
-        
+        //move down
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && playerPosition.y + getTexture().getSize().y * getScale().y < windowSize.y - 100)
             movement.y += speed;
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))//shoot laser
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !isSpaceShip)//shoot laser
         {
+
+
+            movement.y -= speed * 5;
+            movement.y -= speed * 5;
+            movement.y -= speed * 5;
+
+
+
+            laserSound.play();
 
         }
 
-        // Apply movement to the player sprite
+
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R) && isSpaceShip)
+        {
+            std::cout << "current position: " << movement.x << "  " << movement.y << std::endl;
+
+        }
+        
+
+
+
+        /*if (!isSpaceShip)
+        {
+
+            if (playerPosition.y > 500)
+            {
+                setPosition(savePencilLoco);
+                return;
+            }
+
+        }*/
+        
+        
+
         move(movement);
     }
 
+    
+
 private:
-    float speed; // Speed of player movement
+    float speed;
 };
