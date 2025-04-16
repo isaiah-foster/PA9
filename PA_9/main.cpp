@@ -34,7 +34,7 @@ int main()
     
     Player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 1.3f }, true);//bool determines if the texture is or is not the spaceship
 
-    Player pencilGun1(pencil, { windowSize.x / 2.f, windowSize.y / 1.3f }, false);
+    Player pencilGun1(pencil, { windowSize.x / 2.f + 37.5f, windowSize.y / 1.3f }, false);
 
 
     //Pencil 2 was commented out:
@@ -64,14 +64,15 @@ int main()
         }
 
         window.clear();
-        window.draw(playerShip);
         window.draw(pencilGun1);
+        window.draw(playerShip);
+
         //window.draw(pencilGun2);
         window.display();
 
 
         sf::Vector2f playerPOS = playerShip.getPosition();
-        sf::Vector2f pencilPOS1 = pencilGun1.getPosition();
+        sf::Vector2f pencilPOS1 = pencilGun1.getPosition() + sf::Vector2f(37.5f, 0.f);
         //sf::Vector2f pencilPOS2 = playerShip.getPosition();
 
         //pencilPOS2.x += .15f;
@@ -98,7 +99,7 @@ int main()
         if (pencil1fired && pencilGun1.getPosition().y < 100) 
         {
 
-            pencilGun1.setPosition(playerShip.getPosition());
+            pencilGun1.setPosition(playerShip.getPosition() + sf::Vector2f(37.5f, 0.f));
 
 
             //pencilGun2.setPosition(playerShip.getPosition());
@@ -115,7 +116,7 @@ int main()
         if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)))
         {
 
-            pencilGun1.setPosition(playerShip.getPosition());
+            pencilGun1.setPosition(playerShip.getPosition() + sf::Vector2f(37.5f, 0.f));
 
         }
 
