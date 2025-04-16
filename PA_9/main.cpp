@@ -34,20 +34,26 @@ int main()
     
     Player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 1.3f }, true);//bool determines if the texture is or is not the spaceship
 
-    Player pencilGun(pencil, { windowSize.x / 2.f, windowSize.y / 1.3f }, false);
+    Player pencilGun1(pencil, { windowSize.x / 2.f, windowSize.y / 1.3f }, false);
 
 
+    //Pencil 2 was commented out:
 
+    //Player pencilGun2(pencil, { windowSize.x / 1.85f, windowSize.y / 1.3f }, false);
 
-    /*std::vector<sf::Sprite*> sprites;
+    
 
-    sprites.push_back(&playerShip);
-    sprites.push_back(&pencilGun);*/
+    
 
 
     track1.play();
 
     
+
+    bool pencil1fired = false;
+    //bool pencil2fired = false;
+
+
     while (window.isOpen())
     {
 
@@ -59,11 +65,61 @@ int main()
 
         window.clear();
         window.draw(playerShip);
-        window.draw(pencilGun);
+        window.draw(pencilGun1);
+        //window.draw(pencilGun2);
         window.display();
 
+
+        sf::Vector2f playerPOS = playerShip.getPosition();
+        sf::Vector2f pencilPOS1 = pencilGun1.getPosition();
+        //sf::Vector2f pencilPOS2 = playerShip.getPosition();
+
+        //pencilPOS2.x += .15f;
+
         playerShip.playerActions(window, laserSound, true);
-        pencilGun.playerActions(window, laserSound, false);
+        pencilGun1.playerActions(window, laserSound, false);
+        //pencilGun2.playerActions(window, laserSound, false);
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::L)) //log player location to terminal
+        {
+            std::cout << "Player Position: (" << playerPOS.x << ", " << playerPOS.y << ")" << std::endl;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !pencil1fired) 
+        {
+            pencil1fired = true;
+            //pencil2fired = true;
+            laserSound.play();
+        }
+        
+
+
+        if (pencil1fired && pencilGun1.getPosition().y < 100) 
+        {
+
+            pencilGun1.setPosition(playerShip.getPosition());
+
+
+            //pencilGun2.setPosition(playerShip.getPosition());
+
+            
+            //pencilGun2.setPosition(playerShip.getPosition());
+
+
+            pencil1fired = false;
+            //pencil2fired = false;
+        }
+        
+
+        if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)))
+        {
+
+            pencilGun1.setPosition(playerShip.getPosition());
+
+        }
+
+
 
     }
 
