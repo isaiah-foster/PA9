@@ -92,7 +92,25 @@ int main()
             pencil1fired = true;
             //pencil2fired = true;
             laserSound.play();
+
+            //std::cout << "AW LAWD HE SHEWTIN" << std::endl;
+
         }
+        else if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)))
+        {
+            pencil1fired = false;
+
+            pencilGun1.setIsShooting(false);
+
+            //std::cout << "NOT SHOOTING" << std::endl;
+
+        }
+        
+
+
+
+
+        
         
 
 

@@ -22,7 +22,7 @@ public:
 
 
     //constructor creates a pencil using the player class
-    Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = false, sf::Vector2f position = { 0.3f + 50.f, 0.f }) :
+    Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = false, sf::Vector2f position = { 0.3f + 50.f, 0.f }) ://the plus 50 offsets the starting position of the pencils to be located right underneath the spaceship
         sf::Sprite(texture), speed(.5f)
     {
         position = getPosition();
@@ -67,7 +67,9 @@ public:
         //THIS is kinda dumb. the pencil constructor is only invoked when the player shoots. But it works
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !isSpaceShip)//shoot laser
         {
+            setIsShooting(true);
 
+            
 
             movement.y -= 15;
             movement.y -= 15;
@@ -121,6 +123,7 @@ public:
     {
         isShooting = isShootingNewValue;
     }
+
 
 
 private:
