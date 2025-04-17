@@ -2,6 +2,7 @@
 #include <vector>
 #include "menu.hpp"
 #include "player.hpp"
+#include "background.hpp"
 
 int main()
 {
@@ -26,12 +27,17 @@ int main()
 
 
     sf::Music track1;
-    track1.openFromFile("track3.mp3");
+    track1.openFromFile("track1.mp3");
 
 
     track1.setVolume(50.0);
+
+
+    sf::Texture backgroundTexture;
+	backgroundTexture.loadFromFile("Background.jpeg");
     
-    
+    background backgroundSprite(backgroundTexture, { 0.f, 0.f });
+
     Player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 1.3f }, true);//bool determines if the texture is or is not the spaceship
 
     Player pencilGun1(pencil, { windowSize.x / 2.f + 37.5f, windowSize.y / 1.3f }, false);
@@ -64,8 +70,11 @@ int main()
         }
 
         window.clear();
+        window.draw(backgroundSprite);
+
         window.draw(pencilGun1);
         window.draw(playerShip);
+
 
         //window.draw(pencilGun2);
         window.display();
@@ -107,7 +116,7 @@ int main()
         }
         
 
-
+        
 
 
         
