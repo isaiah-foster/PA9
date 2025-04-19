@@ -205,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="target.hpp" />
     <ClInclude Include="pencil.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="player.hpp" />

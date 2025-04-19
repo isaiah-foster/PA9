@@ -27,7 +27,7 @@ int main()
 
 
     sf::Music track1;
-    track1.openFromFile("track1.mp3");
+    track1.openFromFile("track3.mp3");
 
 
     track1.setVolume(50.0);
