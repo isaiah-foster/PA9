@@ -3,7 +3,7 @@
 #include <string>
 using std::string;
 
-#define BACKGROUND_SCALE 5.f
+#define BACKGROUND_SCALE 7.f
 
 class background : public sf::Sprite
 {

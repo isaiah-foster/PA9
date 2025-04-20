@@ -1,28 +1,62 @@
 #pragma once
-#include <SFML/graphics.hpp>
+
+#ifndef TARGET_HPP
+#define TARGETHPP
+
+#include <SFML/Graphics.hpp>
 #include <string>
+#include <SFML/Graphics/Shape.hpp>
+#include <cstddef>
+#include <SFML/Graphics/Export.hpp>
+
 using std::string;
 
-
-class background : public sf::Sprite
+class target : public sf::Drawable
 {
 public:
-	background(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f });
-	void setPosition(sf::Vector2f position);
-	void setScale(float scale);
+    sf::FloatRect getBounds() const
+    {
+        return circle.getGlobalBounds();
+    }
+
+
+    target() 
+    {
+        circle.setRadius(50.f);
+        circle.setFillColor(sf::Color::Red);
+        circle.setOrigin(sf::Vector2f(50.f, 50.f)); // center the origin
+        circle.setPosition(sf::Vector2f(400.f, 300.f)); // default position
+    }
+
+    
+
+
+    void setPosition(float x, float y) 
+    {
+        circle.setPosition(sf::Vector2f(x, y));
+    }
+
+    sf::Vector2f getPosition() const 
+    {
+        return circle.getPosition();
+    }
+
+    float getRadius() const 
+    {
+        return circle.getRadius();
+    }
+
 private:
-	float scale;
+
+    sf::CircleShape circle;
+
+    //required draw override from sf::Drawable
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override 
+    {
+        target.draw(circle, states);
+    }
+
 };
 
 
-
-void background::setPosition(sf::Vector2f position)
-{
-	sf::Sprite::setPosition(position);
-}
-
-void background::setScale(float scale)
-{
-	sf::Sprite::setScale({ scale, scale });
-	this->scale = scale;
-}
+#endif

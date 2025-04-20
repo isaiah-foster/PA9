@@ -199,14 +199,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="target.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Z:\Downloads\PlayerShip.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="classInteractions.hpp" />
     <ClInclude Include="target.hpp" />
-    <ClInclude Include="pencil.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="player.hpp" />
   </ItemGroup>

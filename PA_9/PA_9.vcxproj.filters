@@ -18,6 +18,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="target.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Z:\Downloads\PlayerShip.png">
@@ -31,13 +34,13 @@
     <ClInclude Include="player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pencil.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="background.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="target.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classInteractions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

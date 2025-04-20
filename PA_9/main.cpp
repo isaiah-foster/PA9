@@ -3,6 +3,9 @@
 #include "menu.hpp"
 #include "player.hpp"
 #include "background.hpp"
+#include "target.hpp"
+#include "classInteractions.hpp"
+
 
 int main()
 {
@@ -54,11 +57,13 @@ int main()
 
     track1.play();
 
-    
+    target ball1;
 
     bool pencil1fired = false;
     //bool pencil2fired = false;
 
+   
+   
 
     while (window.isOpen())
     {
@@ -74,6 +79,10 @@ int main()
 
         window.draw(pencilGun1);
         window.draw(playerShip);
+        window.draw(ball1);
+
+        
+        
 
 
         //window.draw(pencilGun2);
@@ -83,6 +92,8 @@ int main()
         sf::Vector2f playerPOS = playerShip.getPosition();
         sf::Vector2f pencilPOS1 = pencilGun1.getPosition() + sf::Vector2f(37.5f, 0.f);
         //sf::Vector2f pencilPOS2 = playerShip.getPosition();
+
+        
 
         //pencilPOS2.x += .15f;
 
@@ -145,6 +156,13 @@ int main()
 
             pencilGun1.setPosition(playerShip.getPosition() + sf::Vector2f(37.5f, 0.f));
 
+        }
+
+
+
+        if (classInteractions::checkShotHit(pencilGun1, ball1))
+        {
+            std::cout << "TARGET HIT!\n" << std::endl;
         }
 
 

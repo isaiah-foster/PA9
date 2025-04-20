@@ -1,4 +1,7 @@
-﻿#include <SFML/Audio.hpp>
+﻿#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
+#include <SFML/Audio.hpp>
 
 class Player : public sf::Sprite 
 {
@@ -126,9 +129,13 @@ public:
 
 
 
+
+
 private:
     bool isShooting;
 
 
     float speed;
 };
+
+#endif
