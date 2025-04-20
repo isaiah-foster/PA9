@@ -43,5 +43,8 @@
     <ClInclude Include="classInteractions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pencil.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

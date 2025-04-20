@@ -5,6 +5,7 @@
 #include "background.hpp"
 #include "target.hpp"
 #include "classInteractions.hpp"
+#include "pencil.hpp"
 
 
 int main()
@@ -43,7 +44,7 @@ int main()
 
     Player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 1.3f }, true);//bool determines if the texture is or is not the spaceship
 
-    Player pencilGun1(pencil, { windowSize.x / 2.f + 37.5f, windowSize.y / 1.3f }, false);
+    Pencil pencilGun1(pencil, { windowSize.x / 2.f + 37.5f, windowSize.y / 1.3f });
 
 
     //Pencil 2 was commented out:
@@ -57,7 +58,7 @@ int main()
 
     track1.play();
 
-    target ball1;
+    Target ball1;
 
     bool pencil1fired = false;
     //bool pencil2fired = false;
@@ -97,15 +98,15 @@ int main()
 
         //pencilPOS2.x += .15f;
 
-        playerShip.playerActions(window, laserSound, true);
-        pencilGun1.playerActions(window, laserSound, false);
+        playerShip.playerActions(window, true);
+        pencilGun1.pencilActions(window, laserSound);
         //pencilGun2.playerActions(window, laserSound, false);
 
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::L)) //log player location to terminal
-        {
-            std::cout << "Player Position: (" << playerPOS.x << ", " << playerPOS.y << ")" << std::endl;
-        }
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::L)) //log player location to terminal
+        //{
+        //    std::cout << "Player Position: (" << playerPOS.x << ", " << playerPOS.y << ")" << std::endl;
+        //}
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !pencil1fired) 
         {

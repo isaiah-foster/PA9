@@ -11,7 +11,7 @@
 
 using std::string;
 
-class target : public sf::Drawable
+class Target : public sf::Drawable
 {
 public:
     sf::FloatRect getBounds() const
@@ -20,7 +20,7 @@ public:
     }
 
 
-    target() 
+    Target() 
     {
         circle.setRadius(50.f);
         circle.setFillColor(sf::Color::Red);
@@ -55,6 +55,8 @@ private:
     {
         target.draw(circle, states);
     }
+
+
 
 };
 

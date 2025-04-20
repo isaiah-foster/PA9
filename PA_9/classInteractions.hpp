@@ -8,6 +8,7 @@
 #include <cmath>
 #include "player.hpp"
 #include "target.hpp"
+#include "pencil.hpp"
 
 class classInteractions
 {
@@ -17,14 +18,14 @@ private:
 	
 public:
 	
-    static bool checkShotHit(const Player& bullet, const target& enemy)
+    static bool checkShotHit(const Pencil& bullet, const Target& enemy)
     {
         if (bullet.getIsShooting())
         {
             float bulletX = bullet.getPosition().x;
             float enemyX = enemy.getPosition().x;
 
-            float tolerance = 10.f; // You can adjust this
+            float tolerance = 10.f; // adjust this to change hitboxes
             return std::abs(bulletX - enemyX) < tolerance;
         }
 

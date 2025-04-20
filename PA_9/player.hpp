@@ -1,7 +1,9 @@
-﻿#ifndef PLAYER_HPP
+﻿#pragma once
+#ifndef PLAYER_HPP
 #define PLAYER_HPP
 
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 class Player : public sf::Sprite 
 {
@@ -25,11 +27,11 @@ public:
 
 
     //constructor creates a pencil using the player class
-    Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = false, sf::Vector2f position = { 0.3f + 50.f, 0.f }) ://the plus 50 offsets the starting position of the pencils to be located right underneath the spaceship
-        sf::Sprite(texture), speed(.5f)
-    {
-        position = getPosition();
-    }
+    //Player(const sf::Texture& texture, bool isSpaceShip = false, bool respawn = false, sf::Vector2f position = { 0.3f + 50.f, 0.f }) ://the plus 50 offsets the starting position of the pencils to be located right underneath the spaceship
+    //    sf::Sprite(texture), speed(.5f)
+    //{
+    //    position = getPosition();
+    //}
 
 
 
@@ -38,7 +40,7 @@ public:
 
 
     // Function to move the player based on keyboard input and window size
-    void playerActions(const sf::RenderWindow& window, sf::Music& laserSound, bool isSpaceShip)
+    void playerActions(const sf::RenderWindow& window, bool isSpaceShip)
     {
 
         sf::Vector2f movement(0.f, 0.f); //variable to track movement
@@ -67,22 +69,7 @@ public:
 
 
 
-        //THIS is kinda dumb. the pencil constructor is only invoked when the player shoots. But it works
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !isSpaceShip)//shoot laser
-        {
-            setIsShooting(true);
-
-            
-
-            movement.y -= 15;
-            movement.y -= 15;
-            movement.y -= 15;
-            
-
-
-
-            laserSound.play();
-        }
+        
 
 
         
@@ -117,22 +104,13 @@ public:
 
     
 
-    bool getIsShooting()const//get value of isShooting
-    {
-        return isShooting;
-    }
-
-    void setIsShooting(bool isShootingNewValue)
-    {
-        isShooting = isShootingNewValue;
-    }
+    
 
 
 
 
 
 private:
-    bool isShooting;
 
 
     float speed;

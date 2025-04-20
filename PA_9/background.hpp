@@ -16,7 +16,7 @@ private:
 };
 
 background::background(const sf::Texture& texture, sf::Vector2f position)
-	: sf::Sprite(texture) // Explicitly call the sf::Sprite constructor with the texture
+	: sf::Sprite(texture)
 {
 	setPosition(position);
 	setScale(BACKGROUND_SCALE);
