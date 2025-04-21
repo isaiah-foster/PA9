@@ -4,12 +4,12 @@
 #include <string>
 using std::string;
 #define PLAYER_SCALE 0.15f
-#define PLAYER_SPEED 3
+#define PLAYER_SPEED .2f
 
 class player : public sf::Sprite
 {
 public:
-player(sf::Vector2f position = { 0.f, 0.f });
+    player(sf::Vector2f position = { 0.f, 0.f }, const sf::Texture& playerTexture = sf::Texture());
 void movePlayer(sf::Vector2u windowSize);
 
 private:
@@ -17,13 +17,13 @@ float speed;
 
 };
 
-player::player(sf::Vector2f position)
-	: sf::Sprite(sf::Texture playerTexture()) // Explicitly call the sf::Sprite constructor
+player::player(sf::Vector2f position, const sf::Texture& playerTexture)
+	: sf::Sprite(playerTexture) // Explicitly call the sf::Sprite constructor
 {
-sf::Texture playerTexture;
-playerTexture.loadFromFile("Player.png"); // Load the player texture
+//sf::Texture playerTexture;
+//playerTexture.loadFromFile("Player.png"); // Load the player texture
 setTexture(playerTexture); // Set the texture for the sprite
-setPosition({ position.x /2 , position.y/1.2f });
+setPosition({ position.x /2 , position.y/1.5f });
 setScale({ PLAYER_SCALE, PLAYER_SCALE });
 speed = PLAYER_SPEED;
 }

@@ -204,7 +204,6 @@
     <Image Include="Background.jpeg" />
     <Image Include="Player.png" />
     <Image Include="fBall.png" />
-    <Image Include="Z:\Downloads\PlayerShip.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.hpp" />

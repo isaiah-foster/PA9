@@ -17,13 +17,8 @@ int main()
 	sf::Texture backgroundTexture;
     playerTexture.loadFromFile("Player.png");
 	backgroundTexture.loadFromFile("Background.jpeg");
-	player playerSprite(playerTexture, { width, height});
+	player playerSprite({ width, height}, playerTexture);
 	background backgroundSprite(backgroundTexture, { 0.f, 0.f });
-
-
-    sf::Texture shipTexture;
-    shipTexture.loadFromFile("PlayerShip.png");
-	player playerShip(shipTexture, { width, height});
 
 	sf::Texture ballTexture;
 	ballTexture.loadFromFile("fBall.png");
@@ -37,24 +32,22 @@ int main()
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
-			
+
 
         }
 
-	
-		ball.update(windowSize);
+        ball.update(windowSize);
 
-        playerShip.movePlayer(windowSize);
-        }
-        
+        playerSprite.movePlayer(windowSize);
+
+
         playerSprite.movePlayer(windowSize);
         window.clear();
-		window.draw(backgroundSprite);
+        window.draw(backgroundSprite);
         window.draw(playerSprite);
-		window.draw(ball);
-        window.draw(playerShip);
+        window.draw(ball);
+        window.draw(playerSprite);
         window.display();
-
     }
+        return 0;
 }
-

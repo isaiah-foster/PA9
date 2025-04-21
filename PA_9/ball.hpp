@@ -23,6 +23,8 @@ public:
 
    void update(sf::Vector2u windowSize);  
 
+   void moderateSpeed();
+
 private:  
    sf::Vector2f velocity;  
 };  
@@ -31,6 +33,7 @@ void Ball::update(sf::Vector2u windowSize) {
 
    const float bounceFactor = 1.0f;
 
+   moderateSpeed(); // keep speed in check
 
    move(velocity);  
 
@@ -64,4 +67,17 @@ void Ball::update(sf::Vector2u windowSize) {
        velocity.x = -velocity.x * bounceFactor;  
 	   velocity.y -= 0.1f; //slow down the ball slightly on bounce
    }  
+}
+
+
+void Ball::moderateSpeed() 
+{
+    if (velocity.x > .7)
+        velocity.x = 0.7f;
+    else if (velocity.x < -.7)
+        velocity.x = 0.7f;
+    if (velocity.y > .7)
+        velocity.y = 0.7f;
+    else if (velocity.y < -.7)
+        velocity.y = 0.7f;
 }
