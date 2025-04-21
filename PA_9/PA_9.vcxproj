@@ -211,6 +211,13 @@
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="projectile.hpp" />
+    <ClInclude Include="ScoreB.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HighScore.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\PressStart2P-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

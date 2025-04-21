@@ -3,6 +3,7 @@
 #include "player.hpp"
 #include "background.hpp"
 #include "ball.hpp"
+#include "ScoreB.hpp"
 
 int main()
 {
@@ -26,6 +27,7 @@ int main()
 	ball.setScale({ 0.1f, 0.1f });
     sf::Clock clock;
 
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -48,6 +50,9 @@ int main()
         window.draw(ball);
         window.draw(playerSprite);
         window.display();
+        
+
+
     }
         return 0;
 }

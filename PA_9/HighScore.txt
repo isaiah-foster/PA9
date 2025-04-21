@@ -1,0 +1,3 @@
+Score:0
+TimePlayed:0:00
+ObjectsHit:0
