@@ -6,16 +6,17 @@
 int main()
 {
     //window settings
-	sf::VideoMode desktop = sf::VideoMode::getFullscreenModes()[0];
-	unsigned int width = desktop.size.x * 1;
-	unsigned int height = desktop.size.y * 1;
-    sf::RenderWindow window(desktop, "Game", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar);
+
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    sf::RenderWindow window(desktop, "Fullscreen Window");
+	float width = desktop.size.x * 1;
+	float height = desktop.size.y * 1;
     sf::Vector2u windowSize = window.getSize();
 
 
     sf::Texture shipTexture;
     shipTexture.loadFromFile("PlayerShip.png");
-	player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
+	player playerShip(shipTexture, { width, height});
 
 	sf::Texture ballTexture;
 	ballTexture.loadFromFile("fBall.png");
@@ -29,13 +30,14 @@ int main()
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
-
+			
 
         }
 
 	
 		ball.update(windowSize);
 
+        playerShip.movePlayer(windowSize);
         window.clear();
 		window.draw(ball);
         window.draw(playerShip);
