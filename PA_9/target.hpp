@@ -14,6 +14,8 @@ using std::string;
 class Target : public sf::Drawable
 {
 public:
+    
+
     sf::FloatRect getBounds() const
     {
         return circle.getGlobalBounds();
@@ -27,9 +29,7 @@ public:
         circle.setOrigin(sf::Vector2f(50.f, 50.f)); // center the origin
         circle.setPosition(sf::Vector2f(400.f, 300.f)); // default position
     }
-
     
-
 
     void setPosition(float x, float y) 
     {
@@ -55,8 +55,6 @@ private:
     {
         target.draw(circle, states);
     }
-
-
 
 };
 

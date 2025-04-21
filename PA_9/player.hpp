@@ -16,7 +16,7 @@ public:
 
     //constructor that initializes the player with a texture and an optional position
     Player(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f }, bool isSpaceShip = true)
-        : sf::Sprite(texture), speed(3.0f), original_yaxis(position.y), original_xaxis(position.x)
+        : sf::Sprite(texture), speed(50.0f), original_yaxis(position.y), original_xaxis(position.x)
     {
         setPosition(position);
         setScale({ 0.1f, 0.1f });  //adjust scale if needed
@@ -79,20 +79,6 @@ public:
 
         }
         
-
-
-
-        /*if (!isSpaceShip)
-        {
-
-            if (playerPosition.y > 500)
-            {
-                setPosition(savePencilLoco);
-                return;
-            }
-
-        }*/
-            
         
 
         move(movement);

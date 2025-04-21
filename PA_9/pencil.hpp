@@ -13,14 +13,14 @@ public:
 
 
     //constructor creates a pencil
-   Pencil(const sf::Texture& texture, sf::Vector2f position = { 0.3f + 50.f, 0.f }) ://the plus 50 offsets the starting position of the pencils to be located right underneath the spaceship
-        sf::Sprite(texture), speed(.5f)
-    {
-        position = getPosition();
-        setScale(sf::Vector2f(0.1f, 0.1f));
-    }
-
-
+   Pencil(const sf::Texture& texture, sf::Vector2f position = { 0.3f, 0.f }) ://the plus 50 offsets the starting position of the pencils to be located right underneath the spaceship
+        sf::Sprite(texture), speed(.00002F)
+   {
+        setPosition(position);
+        setScale(sf::Vector2f(0.1f, 0.1f));//adjust to change pencil size
+   }
+   
+    
 
 
    void pencilActions(const sf::RenderWindow& window, sf::Music& laserSound)
@@ -58,11 +58,8 @@ public:
 
 
 
-           movement.y -= 15;
-           movement.y -= 15;
-           movement.y -= 15;
-
-
+           movement.y -= 100;
+          
 
 
            laserSound.play();
@@ -92,7 +89,10 @@ public:
        isShooting = isShootingNewValue;
    }
    
-
+   /*~Pencil()
+   {
+       std::cout << "Pencil destructor invoked" << std::endl;
+   }*/
 
 private:
 

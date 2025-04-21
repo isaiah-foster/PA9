@@ -46,5 +46,8 @@
     <ClInclude Include="pencil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ball.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

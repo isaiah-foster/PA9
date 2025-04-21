@@ -207,6 +207,7 @@
   <ItemGroup>
     <ClInclude Include="background.hpp" />
     <ClInclude Include="classInteractions.hpp" />
+    <ClInclude Include="ball.hpp" />
     <ClInclude Include="pencil.hpp" />
     <ClInclude Include="target.hpp" />
     <ClInclude Include="menu.hpp" />
