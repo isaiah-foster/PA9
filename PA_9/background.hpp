@@ -3,8 +3,6 @@
 #include <string>
 using std::string;
 
-#define BACKGROUND_SCALE 8.0f
-
 class background : public sf::Sprite
 {
 public:
@@ -15,10 +13,14 @@ private:
 	float scale;
 };
 background::background(const sf::Texture& texture, sf::Vector2f position)
-	: sf::Sprite(texture) // Explicitly call the sf::Sprite constructor with the texture
+	: sf::Sprite(texture) //call the sf::Sprite constructor with the texture
 {
 	setPosition(position);
-	setScale(BACKGROUND_SCALE);
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	//set the scale of the background to fit the screen no matter resolution or aspect ratio
+	desktop.size.x / texture.getSize().x > desktop.size.y / texture.getSize().y ?
+		setScale(desktop.size.x / texture.getSize().x) : 
+		setScale(desktop.size.y/texture.getSize().y);
 }
 void background::setPosition(sf::Vector2f position)
 {

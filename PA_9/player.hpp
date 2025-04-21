@@ -4,7 +4,7 @@
 #include <string>
 using std::string;
 #define PLAYER_SCALE 0.15f
-#define PLAYER_SPEED .2f
+#define PLAYER_SPEED 2.f
 
 class player : public sf::Sprite
 {
@@ -22,8 +22,9 @@ player::player(sf::Vector2f position, const sf::Texture& playerTexture)
 {
 setTexture(playerTexture); // Set the texture for the sprite
 setPosition({ position.x /2 , position.y/1.5f });
-setScale({ PLAYER_SCALE, PLAYER_SCALE });
-speed = PLAYER_SPEED;
+sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+setScale({ PLAYER_SCALE*desktop.size.x/1920, PLAYER_SCALE*desktop.size.x/1920});
+speed = PLAYER_SPEED * ((float)desktop.size.x/1920);
 }
 
 
