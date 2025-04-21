@@ -20,8 +20,6 @@ float speed;
 player::player(sf::Vector2f position, const sf::Texture& playerTexture)
 	: sf::Sprite(playerTexture) // Explicitly call the sf::Sprite constructor
 {
-//sf::Texture playerTexture;
-//playerTexture.loadFromFile("Player.png"); // Load the player texture
 setTexture(playerTexture); // Set the texture for the sprite
 setPosition({ position.x /2 , position.y/1.5f });
 setScale({ PLAYER_SCALE, PLAYER_SCALE });
