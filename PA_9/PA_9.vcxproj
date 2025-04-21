@@ -201,9 +201,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="fBall.png" />
     <Image Include="Z:\Downloads\PlayerShip.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ball.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="player.hpp" />
   </ItemGroup>

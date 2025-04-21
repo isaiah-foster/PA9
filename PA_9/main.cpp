@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "menu.hpp"
 #include "player.hpp"
+#include "ball.hpp"
 
 int main()
 {
@@ -13,9 +14,14 @@ int main()
 
 
     sf::Texture shipTexture;
-    shipTexture.loadFromFile("player_ship.png");
+    shipTexture.loadFromFile("PlayerShip.png");
 	player playerShip(shipTexture, { windowSize.x / 2.f, windowSize.y / 2.f });
 
+	sf::Texture ballTexture;
+	ballTexture.loadFromFile("fBall.png");
+	Ball ball(ballTexture);
+	ball.setScale({ 0.1f, 0.1f });
+    sf::Clock clock;
 
     while (window.isOpen())
     {
@@ -27,7 +33,11 @@ int main()
 
         }
 
+	
+		ball.update(windowSize);
+
         window.clear();
+		window.draw(ball);
         window.draw(playerShip);
         window.display();
 

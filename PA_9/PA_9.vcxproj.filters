@@ -23,12 +23,18 @@
     <Image Include="Z:\Downloads\PlayerShip.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="fBall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ball.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

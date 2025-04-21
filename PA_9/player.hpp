@@ -18,7 +18,7 @@ float speed;
 player::player(const sf::Texture& texture, sf::Vector2f position)
 : sf::Sprite(texture) // Explicitly call the sf::Sprite constructor with the texture
 {
-setPosition({ position.x, position.y });
+setPosition({ position.x/2, position.y/10 });
 setScale({ 0.1f, 0.1f });
 speed = 3;
 }
