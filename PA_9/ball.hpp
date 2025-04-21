@@ -5,10 +5,11 @@
 class Ball : public sf::Sprite {  
 public:  
    Ball(const sf::Texture& tex)  
-       : sf::Sprite(tex), velocity(sf::Vector2f{ 0.f, 0.f }) {  
-       setOrigin(sf::Vector2f{  
-           static_cast<float>(tex.getSize().x) / 2.f,  
-           static_cast<float>(tex.getSize().y) / 2.f  
+       : sf::Sprite(tex), velocity(sf::Vector2f{ -.2, -.2 }) {  
+       setOrigin(sf::Vector2f{
+           static_cast<float>(tex.getSize().x) / 2.f,
+           static_cast<float>(tex.getSize().y) / 2.f  ,
+          
        });  
    }  
 
@@ -39,25 +40,28 @@ void Ball::update(sf::Vector2u windowSize) {
    // Bottom  
    if (pos.y + radius >= static_cast<float>(windowSize.y)) {  
        setPosition({ pos.x, static_cast<float>(windowSize.y) - radius });  
-       velocity.y = -velocity.y * bounceFactor;
-       if (std::abs(velocity.y) < 5.f) velocity.y = 0.f;  
+       velocity.y = -velocity.y * bounceFactor; //bounce the ball
+	   velocity.x -= 0.1f; //slow down the ball slightly on bounce
    }  
 
    // Top  
    if (pos.y - radius <= 0.f) {  
        setPosition({ pos.x, radius });  
        velocity.y = -velocity.y * bounceFactor;  
+	   velocity.x -= 0.1f; //slow down the ball slightly on bounce
    }  
 
    // Left  
    if (pos.x - radius <= 0.f) {  
        setPosition({ radius, pos.y });  
        velocity.x = -velocity.x * bounceFactor;  
+	   velocity.y -= 0.1f; //slow down the ball slightly on bounce
    }  
 
    // Right  
    if (pos.x + radius >= static_cast<float>(windowSize.x)) {  
        setPosition({ static_cast<float>(windowSize.x) - radius, pos.y });  
        velocity.x = -velocity.x * bounceFactor;  
+	   velocity.y -= 0.1f; //slow down the ball slightly on bounce
    }  
 }

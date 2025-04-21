@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "menu.hpp"
 #include "player.hpp"
+#include "background.hpp"
 #include "ball.hpp"
 
 int main()
@@ -8,10 +9,16 @@ int main()
     //window settings
 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    sf::RenderWindow window(desktop, "Fullscreen Window");
-	float width = desktop.size.x * 1;
-	float height = desktop.size.y * 1;
+    sf::RenderWindow window(desktop, "School Shooter");
+	float width = desktop.size.x;
+	float height = desktop.size.y;
     sf::Vector2u windowSize = window.getSize();
+    sf::Texture playerTexture;
+	sf::Texture backgroundTexture;
+    playerTexture.loadFromFile("Player.png");
+	backgroundTexture.loadFromFile("Background.jpeg");
+	player playerSprite(playerTexture, { width, height});
+	background backgroundSprite(backgroundTexture, { 0.f, 0.f });
 
 
     sf::Texture shipTexture;
@@ -38,7 +45,12 @@ int main()
 		ball.update(windowSize);
 
         playerShip.movePlayer(windowSize);
+        }
+        
+        playerSprite.movePlayer(windowSize);
         window.clear();
+		window.draw(backgroundSprite);
+        window.draw(playerSprite);
 		window.draw(ball);
         window.draw(playerShip);
         window.display();

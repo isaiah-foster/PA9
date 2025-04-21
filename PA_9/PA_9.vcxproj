@@ -201,13 +201,17 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Background.jpeg" />
+    <Image Include="Player.png" />
     <Image Include="fBall.png" />
     <Image Include="Z:\Downloads\PlayerShip.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.hpp" />
+    <ClInclude Include="background.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="player.hpp" />
+    <ClInclude Include="projectile.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

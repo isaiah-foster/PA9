@@ -20,7 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Z:\Downloads\PlayerShip.png">
+    <Image Include="Player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Background.jpeg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="fBall.png">
@@ -32,6 +35,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="background.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ball.hpp">
