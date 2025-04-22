@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/graphics.hpp>
 #include <string>
+#include <sstream>
 #include <iostream>
 #include <fstream>
 
@@ -17,15 +18,7 @@ public:
 		this->HighScore = nullptr;
 
 		
-		if (!font.loadFromFile("PressStart2P-Regular.ttf")) {
-			std::cerr << "Failed to load font\n";
-		}
-
-		text.setFont(font);
-		text.setCharacterSize(60);
-		text.setFillColor(sf::Color::Red);
-		text.setStyle(sf::Text::Bold);
-		text.setPosition(50.f, 50.f);
+		
 	}
 
 	struct TimePlayed {
@@ -34,16 +27,14 @@ public:
 	};
 	void setScore(int newScore) {
 		score = newScore;
-		text.setString("Score: " + std::to_string(score));
+	
 	}
 
 	int getScore() {
 		return score;
 	}
 
-	void draw(sf::RenderWindow& window) {
-		window.draw(text);
-	}
+	
 	void setPlayTime(int minutes, int seconds) {
 		playTime.min = minutes;
 		playTime.sec = seconds;
@@ -132,18 +123,14 @@ public:
 
 		}
 	}
-	void displayHighScore(sf::RenderWindow& window) {
-		sf::Text highText;
-		highText.setFont(font);
-		highText.setCharacterSize(60);
-		highText.setFillColor(sf::Color::Green);
-		highText.setStyle(sf::Text::Bold);
-		highText.setPosition(50.f, 150.f);
-		highText.setString("High Score: " + std::to_string(HighScore->getScore()));
-
-		window.draw(highText);
+	void displayHighScore() {
+		
 	}
-	
+	void loadFont(sf::Font& font, std::string str) {
+		if (!font.openFromFile(str)) {
+			std::cerr << "Error" << std::endl;
+		}
+	}
 	
 private:
 	int score;
@@ -151,7 +138,6 @@ private:
 	int objectsHit;
 	ScoreBoard* HighScore;
 
-	sf::Font font;
-	sf::Text text;
+
 	
 };
