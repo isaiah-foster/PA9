@@ -45,7 +45,9 @@ public:
 
 
 
-    static void interactionHandler(sf::Music& laserSound, bool pencil1fired, Pencil& pencilGun1, Target& ball1, Player& playerShip)
+
+    //handles 
+    static void interactionHandler(sf::Music& laserSound, bool pencil1fired, Pencil& pencilGun1, Target& ball1, Player& playerShip, int ballHealth)
     {
 
 
@@ -53,10 +55,8 @@ public:
         {
 
             pencil1fired = true;
-            //pencil2fired = true;
             laserSound.play();
 
-            //std::cout << "AW LAWD HE SHEWTIN" << std::endl;
 
         }
         else if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)))
@@ -75,7 +75,7 @@ public:
         {
 
             std::cout << "TARGET HIT!\n" << std::endl;
-
+            ballHealth--;
         }
         else
         {
@@ -107,16 +107,12 @@ public:
 
         }
 
+        ball1.setHealth(ballHealth);
 
 
-
+        
 
     }
-
-    
-
-
-
 
 };
 

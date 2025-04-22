@@ -42,7 +42,8 @@ void Ball::update(sf::Vector2u windowSize) {
     float radius = getGlobalBounds().size.x / 2.f;
 
     // Bottom  
-    if (pos.y + radius >= static_cast<float>(windowSize.y)) {
+    if (pos.y + radius >= static_cast<float>(windowSize.y)) 
+    {
         setPosition({ pos.x, static_cast<float>(windowSize.y) - radius });
         velocity.y = -velocity.y * bounceFactor; //bounce the ball
         velocity.x -= 0.1f; //slow down the ball slightly on bounce

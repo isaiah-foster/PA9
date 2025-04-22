@@ -14,6 +14,15 @@ using std::string;
 class Target : public sf::Drawable
 {
 public:
+
+
+    
+
+
+
+
+
+
     
 
     sf::FloatRect getBounds() const
@@ -24,10 +33,14 @@ public:
 
     Target() 
     {
+
         circle.setRadius(50.f);
         circle.setFillColor(sf::Color::Red);
         circle.setOrigin(sf::Vector2f(50.f, 50.f)); // center the origin
         circle.setPosition(sf::Vector2f(400.f, 300.f)); // default position
+
+        
+
     }
     
 
@@ -46,15 +59,34 @@ public:
         return circle.getRadius();
     }
 
+
+
+    int getHealth()const
+    {
+        return health;
+    }
+
+    void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
+
+
+       
 private:
 
-    sf::CircleShape circle;
-
-    //required draw override from sf::Drawable
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override 
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
     {
         target.draw(circle, states);
     }
+
+    sf::CircleShape circle;
+
+    int health;
+    
+
+
+
 
 };
 

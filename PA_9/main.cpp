@@ -59,6 +59,7 @@ int main()
     //bool pencil2fired = false;
 
 
+    int ballHealth = 20;
 
 
     while (window.isOpen())
@@ -88,6 +89,7 @@ int main()
         playerShip.playerActions(window, true);
         pencilGun1.pencilActions(window, laserSound);
 
-        classInteractions::interactionHandler(laserSound, pencil1fired, pencilGun1, ball1, playerShip);
+        classInteractions::interactionHandler(laserSound, pencil1fired, pencilGun1, ball1, playerShip, ballHealth);
+
     }
 }
