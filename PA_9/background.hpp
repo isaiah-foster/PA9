@@ -1,35 +1,38 @@
-#pragma once
-#include <SFML/graphics.hpp>
-#include <string>
-using std::string;
+#pragma once  
+#include <SFML/graphics.hpp>  
+#include <string>  
+using std::string;  
 
-class background : public sf::Sprite
-{
-public:
-	background(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f });
-	void setPosition(sf::Vector2f position);
-	void setScale(float scale);
-private:
-	float scale;
-};
-background::background(const sf::Texture& texture, sf::Vector2f position)
-	: sf::Sprite(texture) //call the sf::Sprite constructor with the texture
-{
-	setPosition(position);
-	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-	//set the scale of the background to fit the screen no matter resolution or aspect ratio
-	desktop.size.x / texture.getSize().x > desktop.size.y / texture.getSize().y ?
-		setScale(desktop.size.x / texture.getSize().x) : 
-		setScale(desktop.size.y/texture.getSize().y);
-}
-void background::setPosition(sf::Vector2f position)
-{
-	sf::Sprite::setPosition(position);
-}
-void background::setScale(float scale)
-{
-	sf::Sprite::setScale({ scale, scale });
-	this->scale = scale;
-}
+class Background : public sf::Sprite  
+{  
+public:  
+  Background(const sf::Texture& texture, sf::Vector2f position = { 0.f, 0.f });  
 
+private:  
+  sf::Texture texture; // Store the texture as a member variable  
+  float scale;  
+};  
 
+Background::Background(const sf::Texture& texture, sf::Vector2f position)  
+  : sf::Sprite(texture), texture(texture) // Initialize the member texture  
+{  
+  setTexture(this->texture); // Use the member texture  
+  setPosition(position);  
+  sf::VideoMode desktop = sf::VideoMode::getDesktopMode();  
+  float scaleFactor = desktop.size.x / static_cast<float>(texture.getSize().x) >  
+                      desktop.size.y / static_cast<float>(texture.getSize().y) ?  
+                      desktop.size.x / static_cast<float>(texture.getSize().x) :  
+                      desktop.size.y / static_cast<float>(texture.getSize().y);  
+  setScale({ scaleFactor, scaleFactor }); // Pass sf::Vector2f instead of float  
+}  
+
+//void Background::setPosition(sf::Vector2f position)  
+//{  
+//  sf::Sprite::setPosition(position);  
+//}  
+//
+//void Background::setScale(float scale)  
+//{  
+//  sf::Sprite::setScale({ scale, scale });  
+//  this->scale = scale;  
+//}

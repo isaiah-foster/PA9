@@ -6,29 +6,30 @@ using std::string;
 #define PLAYER_SCALE 0.15f
 #define PLAYER_SPEED 2.f
 
-class player : public sf::Sprite
+class Player : public sf::Sprite
 {
 public:
-    player(sf::Vector2f position = { 0.f, 0.f }, const sf::Texture& playerTexture = sf::Texture());
-void movePlayer(sf::Vector2u windowSize);
+    Player(sf::Vector2f position = { 0.f, 0.f }, const sf::Texture& playerTexture = sf::Texture());
+
+    void movePlayer(sf::Vector2u windowSize);
 
 private:
-float speed;
-
+    sf::Texture texture; // Store the texture as a member variable
+    float speed;
 };
 
-player::player(sf::Vector2f position, const sf::Texture& playerTexture)
-	: sf::Sprite(playerTexture) // Explicitly call the sf::Sprite constructor
+Player::Player(sf::Vector2f position, const sf::Texture& playerTexture)
+    : sf::Sprite(playerTexture), texture(playerTexture) // Initialize the member texture
 {
-setTexture(playerTexture); // Set the texture for the sprite
-setPosition({ position.x /2 , position.y/1.5f });
-sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-setScale({ PLAYER_SCALE*desktop.size.x/1920, PLAYER_SCALE*desktop.size.x/1920});
-speed = PLAYER_SPEED * ((float)desktop.size.x/1920);
+    setTexture(texture); // Use the member texture
+    setPosition({ position.x / 2, position.y / 1.5f });
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    setScale({ PLAYER_SCALE * desktop.size.x / 1920, PLAYER_SCALE * desktop.size.x / 1920 });
+    speed = PLAYER_SPEED * (static_cast<float>(desktop.size.x) / 1920);
 }
 
 
-void player::movePlayer(sf::Vector2u windowSize)
+void Player::movePlayer(sf::Vector2u windowSize)
 {
 	// Get the size of the texture
     sf::Vector2u spriteSize = (getTexture().getSize());

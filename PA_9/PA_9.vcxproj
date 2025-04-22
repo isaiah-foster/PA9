@@ -209,6 +209,7 @@
     <ClInclude Include="ball.hpp" />
     <ClInclude Include="background.hpp" />
     <ClInclude Include="menu.hpp" />
+    <ClInclude Include="MiscFunctions.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="projectile.hpp" />
   </ItemGroup>

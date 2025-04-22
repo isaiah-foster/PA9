@@ -6,10 +6,22 @@
 
 class Menu
 {
+public:
 
+	Menu();
+	void startMenu();
+
+private:
 
 };
 
 
+Menu::Menu()
+{
 
+}
 
+void Menu::startMenu()
+{
+
+}

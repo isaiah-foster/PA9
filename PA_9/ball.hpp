@@ -9,15 +9,15 @@ class Ball : public sf::Sprite {
 public:  
    Ball(const sf::Texture& tex) : sf::Sprite(tex), velocity(sf::Vector2f{ -BASE_SPEED, -BASE_SPEED })
    {
-       setOrigin(sf::Vector2f{static_cast<float>(tex.getSize().x) / 2.f, static_cast<float>(tex.getSize().y) / 2.f});
-	   sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+       sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+       setOrigin(sf::Vector2f{static_cast<float> (std::rand() % desktop.size.x) , static_cast<float>(tex.getSize().y) / 2.f});
+       setPosition(sf::Vector2f{ static_cast<float> (std::rand() % desktop.size.x) , -getGlobalBounds().size.x});
+       setTexture(texture);
 	   scale = (float)desktop.size.x / 1920;
 	   velocity.x *= scale; // scale the velocity to match the screen size
 	   velocity.y *= scale;
        setScale({ scale, scale });
    }  
-
-  // void setVelocity(sf::Vector2f v) { velocity = v; }
 
    sf::Vector2f getVelocity() const { return velocity; }
 
@@ -27,10 +27,13 @@ public:
 
    void bounce(sf::Vector2u &windowSize);
 
+   void setTexture(const sf::Texture& tex) { texture = tex; }
+
 private:  
    sf::Vector2f velocity;  
    float scale; 
-};  
+   sf::Texture texture;
+};
 
 void Ball::update(sf::Vector2u windowSize) {  
 
@@ -41,7 +44,6 @@ void Ball::update(sf::Vector2u windowSize) {
    bounce(windowSize); // check for bounces
 
 }
-
 
 void Ball::moderateSpeed() 
 {
