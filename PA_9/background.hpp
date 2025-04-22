@@ -19,20 +19,5 @@ Background::Background(const sf::Texture& texture, sf::Vector2f position)
   setTexture(this->texture); // Use the member texture  
   setPosition(position);  
   sf::VideoMode desktop = sf::VideoMode::getDesktopMode();  
-  float scaleFactor = desktop.size.x / static_cast<float>(texture.getSize().x) >  
-                      desktop.size.y / static_cast<float>(texture.getSize().y) ?  
-                      desktop.size.x / static_cast<float>(texture.getSize().x) :  
-                      desktop.size.y / static_cast<float>(texture.getSize().y);  
-  setScale({ scaleFactor, scaleFactor }); // Pass sf::Vector2f instead of float  
-}  
-
-//void Background::setPosition(sf::Vector2f position)  
-//{  
-//  sf::Sprite::setPosition(position);  
-//}  
-//
-//void Background::setScale(float scale)  
-//{  
-//  sf::Sprite::setScale({ scale, scale });  
-//  this->scale = scale;  
-//}
+  setScale({ (float)desktop.size.x/ texture.getSize().x , (float)desktop.size.y / texture.getSize().y });
+}

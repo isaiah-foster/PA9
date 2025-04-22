@@ -201,7 +201,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Backdrop.png" />
     <Image Include="Background.jpeg" />
+    <Image Include="Book.png" />
     <Image Include="Player.png" />
     <Image Include="fBall.png" />
   </ItemGroup>
