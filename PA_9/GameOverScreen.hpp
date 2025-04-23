@@ -8,7 +8,7 @@ class GameOverScreen {
 public:
     GameOverScreen(const sf::Texture& backgroundTexture, const sf::Texture& playerTexture, const sf::Font& font, sf::Vector2u windowSize)
         : background(backgroundTexture), player({ (float)windowSize.x, (float)windowSize.y }, playerTexture), 
-        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press ESCAPE To Play Again", 50), menuCont(font, "Or Press E to Exit", 50)
+        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press ESCAPE To Play Again", 50), menuCont(font, "Or Press E to Exit", 50), credits(font, "Credits: \nDylan Hale \nIsaiah Foster \nAaron Sanchez \nJustin Scofield", 20)
     {
         //set up the background
         background.setPosition({ 0,0 });
@@ -22,10 +22,14 @@ public:
         player.setScale({ 0.5f, 0.5f }); // Adjust scale as needed
         player.setOrigin({ player.getGlobalBounds().size.x / 1, player.getGlobalBounds().size.y / 2 });
 
+
+
         //set up the "Game Over" text
         gameOverText.setFillColor(sf::Color::Red);
         gameOverText.setOrigin({ gameOverText.getGlobalBounds().size.x / 2, gameOverText.getGlobalBounds().size.y / 2 });
         gameOverText.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 5.5f });
+
+
 
         //set up escape text
         escapeCont.setFillColor(sf::Color::Red);
@@ -38,6 +42,12 @@ public:
         menuCont.setFillColor(sf::Color::Red);
         menuCont.setOrigin({ escapeCont.getGlobalBounds().size.x / 2, escapeCont.getGlobalBounds().size.y / 2 });
         menuCont.setPosition({ (float)windowSize.x / 1.7f, (float)windowSize.y / 2.8f });
+
+
+
+        credits.setFillColor(sf::Color::Red);
+        credits.setOrigin({ credits.getGlobalBounds().size.x / 2, credits.getGlobalBounds().size.y / 2 });
+        credits.setPosition({ (float)windowSize.x / 4.0f, (float)windowSize.y / 2.0f });
 
 
     }
@@ -70,6 +80,7 @@ public:
             window.draw(gameOverText);
 			window.draw(escapeCont);
             window.draw(menuCont);
+            window.draw(credits);
             window.display();
             
         }
@@ -83,5 +94,5 @@ private:
     sf::Text gameOverText;
     sf::Text escapeCont;
     sf::Text menuCont;
-    
+    sf::Text credits;
 };

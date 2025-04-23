@@ -8,7 +8,8 @@
 
 class ScoreBoard {
 public:
-	ScoreBoard() {
+	ScoreBoard() 
+	{
 		this->score = 0;
 		TimePlayed time;
 		time.min = 0;
@@ -16,15 +17,13 @@ public:
 		this->playTime = time;
 		this->objectsHit = 0;
 		this->HighScore = nullptr;
-
-
-
 	}
 
 	struct TimePlayed {
 		int min;
 		int sec;
 	};
+
 	void setScore(int newScore) {
 		score = newScore;
 

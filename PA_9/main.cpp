@@ -85,11 +85,13 @@ int main()
         return -1; // Exit the program if the font fails to load
     }
 
+
 	sf::Text scoreLabel(font, "Score = 0");
-	scoreLabel.setCharacterSize(50);
+	scoreLabel.setCharacterSize(30);
 	scoreLabel.setFillColor(sf::Color::Green);
 	scoreLabel.setOrigin({ scoreLabel.getGlobalBounds().size.x / 2, scoreLabel.getGlobalBounds().size.y / 2 });
 	scoreLabel.setPosition({ (float)windowSize.x /2 , (float)windowSize.y* .93f });
+
 
     sf::Text healthLabel(font, "Health = 5");
     healthLabel.setCharacterSize(50);
@@ -106,11 +108,11 @@ int main()
 	
 
 	sf::Text highScoreLable(font, "High Score = " + line);
-	highScoreLable.setCharacterSize(50);
+	highScoreLable.setCharacterSize(30);
 	highScoreLable.setFillColor(sf::Color::Red);
 	highScoreLable.setOrigin({ highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
-	highScoreLable.setPosition({ (float)windowSize.x / 2 + 800 * (windowSize.x / 1920), (float)windowSize.y * .93f });
-	
+    highScoreLable.setPosition({ (float)windowSize.x / 2 , (float)windowSize.y * .96f });
+
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
     float ballSpawnRate = 5;
