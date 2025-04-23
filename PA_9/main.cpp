@@ -10,6 +10,7 @@
 #include "pencil.hpp"
 #include "textLabel.hpp"
 #include "ScoreBoard.hpp"
+#include "GameOverScreen.hpp"
 
 int main()
 {
@@ -65,9 +66,10 @@ int main()
 	pencils.push_back(pencil);
 
 
-    //initialize clock to keep track of game time
+    //initialize clocks to keep track of game time
     sf::Clock ball_spawn_clock;
 	sf::Clock pencil_spawn_clock;
+    sf::Clock hitRestrictor;
 
 
     //make text stuff
@@ -157,12 +159,15 @@ int main()
             }
         }
 
+      
 		//check if pencils have hit a ball and if balls have hit the player
         for (auto& ball : balls)
         {
-            if (checkIfPlayerIsHit(player, ball))
+            if (checkIfPlayerIsHit(player, ball) && hitRestrictor.getElapsedTime().asSeconds() >=1)
             {
-                healthLabel.setString("Score = " + std::to_string(player.getHealth()));
+                player.setHealth(player.getHealth() - 1);
+                healthLabel.setString("Health = " + std::to_string(player.getHealth()));
+				hitRestrictor.restart();
             }
             for (auto& pencil : pencils)
             {
@@ -201,8 +206,17 @@ int main()
 		if (player.getHealth() <= 0)
 		{
 			std::cout << "Game Over!" << std::endl;
-			score = 0;
-			menu.startMenu();
+
+			player.setPosition({ (float)windowSize.x / 2.f, (float)windowSize.y / 1.5f });
+			window.clear();
+            GameOverScreen gameOverScreen(background.getTexture(), player.getTexture(), font, windowSize);
+            gameOverScreen.run(window);
+            ballSpawnRate = 5;
+            score = 0;
+			scoreLabel.setString("Score = 0");
+            player.setHealth(5);
+			healthLabel.setString("Health = 5");
+            balls.clear();
 		}
     }
     return 0;
