@@ -23,10 +23,16 @@
     <Image Include="Player.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Background.jpeg">
+    <Image Include="fBall.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="fBall.png">
+    <Image Include="Backdrop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Book.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pencil.PNG">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -40,11 +46,56 @@
     <ClInclude Include="background.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="projectile.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ball.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MiscFunctions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pencil.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBoard.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textLabel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="badguy.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="danceWeapon2.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="danceWeapon4.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="danceWeapon5.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="LaserGunPew.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="track1.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="track3.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="OpenSans.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="Fonts\PressStart2P-Regular.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HighScore.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

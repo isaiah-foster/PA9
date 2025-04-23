@@ -1,9 +1,9 @@
 #pragma once  
 #include <SFML/graphics.hpp>  
 #include <cmath>  
-#define MAX_SPEED 5
+#define MAX_SPEED 7
 #define BOUNCE_RNDM .1
-#define BASE_SPEED 3
+#define BASE_SPEED 5
 
 class Ball : public sf::Sprite {  
 public:  
@@ -17,6 +17,8 @@ public:
 	   velocity.x *= scales[rand()%2]; // random x axis direction at start
 	   velocity.y *= scale;
        setScale({ scale, scale });
+       originalHealth = health = rand()%10 +20;
+     
    }  
 
    sf::Vector2f getVelocity() const { return velocity; }
@@ -29,10 +31,18 @@ public:
 
    void setTexture(const sf::Texture& tex) { texture = tex; }
 
+   void setHealth(int newHealth) { health = newHealth; }
+
+   int getHealth() const { return health; }
+
+   int getOriginalHealth() const { return originalHealth; }
+
 private:  
    sf::Vector2f velocity;  
    float scale; 
    sf::Texture texture;
+   int health;
+   int originalHealth;
 };
 
 void Ball::update(sf::Vector2u windowSize) {  

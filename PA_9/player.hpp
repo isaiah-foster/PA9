@@ -1,10 +1,11 @@
 #pragma once
 
+#include <SFML/Audio.hpp>
 #include <SFML/graphics.hpp>
 #include <string>
 using std::string;
 #define PLAYER_SCALE 0.15f
-#define PLAYER_SPEED 6.f
+#define PLAYER_SPEED 8.f
 
 class Player : public sf::Sprite
 {
@@ -13,9 +14,16 @@ public:
 
     void movePlayer(sf::Vector2u windowSize);
 
+	void decrementPlayerHealth();
+
+	int getHealth() const { return health; }
+
+	void setHealth(int newHealth) { health = newHealth; }
+
 private:
     sf::Texture texture; // Store the texture as a member variable
     float speed;
+    int health;
 };
 
 Player::Player(sf::Vector2f position, const sf::Texture& playerTexture)
@@ -26,6 +34,7 @@ Player::Player(sf::Vector2f position, const sf::Texture& playerTexture)
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     setScale({ PLAYER_SCALE * desktop.size.x / 1920, PLAYER_SCALE * desktop.size.x / 1920 });
     speed = PLAYER_SPEED * (static_cast<float>(desktop.size.x) / 1920);
+    health = 5;
 }
 
 
@@ -42,4 +51,14 @@ void Player::movePlayer(sf::Vector2u windowSize)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) 
         if (position.x + PLAYER_SCALE*spriteSize.x < windowSize.x) // *.1 to match scale
             move({ speed, 0 });
+}
+
+
+void Player::decrementPlayerHealth()
+{
+    if (health > 0)
+    {
+        health -= 1;
+
+    }
 }

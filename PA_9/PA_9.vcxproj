@@ -145,7 +145,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\SFML-3.0.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -202,8 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Backdrop.png" />
-    <Image Include="Background.jpeg" />
     <Image Include="Book.png" />
+    <Image Include="pencil.PNG" />
     <Image Include="Player.png" />
     <Image Include="fBall.png" />
   </ItemGroup>
@@ -212,8 +212,26 @@
     <ClInclude Include="background.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="MiscFunctions.hpp" />
+    <ClInclude Include="pencil.hpp" />
     <ClInclude Include="player.hpp" />
-    <ClInclude Include="projectile.hpp" />
+    <ClInclude Include="ScoreBoard.hpp" />
+    <ClInclude Include="textLabel.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="badguy.mp3" />
+    <Media Include="danceWeapon2.mp3" />
+    <Media Include="danceWeapon4.mp3" />
+    <Media Include="danceWeapon5.mp3" />
+    <Media Include="LaserGunPew.wav" />
+    <Media Include="track1.mp3" />
+    <Media Include="track3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Fonts\PressStart2P-Regular.ttf" />
+    <Font Include="OpenSans.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HighScore.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
