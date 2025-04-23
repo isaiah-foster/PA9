@@ -210,6 +210,7 @@
   <ItemGroup>
     <ClInclude Include="ball.hpp" />
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="GameOverScreen.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="MiscFunctions.hpp" />
     <ClInclude Include="pencil.hpp" />

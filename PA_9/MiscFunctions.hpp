@@ -91,7 +91,6 @@ static bool checkIfPlayerIsHit(Player& player, const Ball& ball)
 
 	if (std::abs(playerX - ballX) < tolerance && std::abs(playerY - ballY) < tolerance)
 	{
-		player.setHealth(player.getHealth() - 1);
 		return true;
 	}
 	return false;

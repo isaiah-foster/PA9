@@ -61,6 +61,9 @@
     <ClInclude Include="textLabel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameOverScreen.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="badguy.mp3">
