@@ -148,6 +148,12 @@ int main()
         //spawn in a new pencil if pencil is shot
 		if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
         {
+                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
+            }
+
+                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
+            }
+
 			Pencil newPencil(pencilTex, player.getPosition());
 			pencils.push_back(newPencil);
 			pencil_spawn_clock.restart();
@@ -171,6 +177,8 @@ int main()
 			}
         }
         
+
+
 		//update all pencils
         for (auto& pencil : pencils)
         {
