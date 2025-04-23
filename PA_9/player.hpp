@@ -98,7 +98,7 @@ public:
         float ballX = ball.getPosition().x;
         float ballY = ball.getPosition().y;
 
-        float tolerance = 50.f; // tweak this for how "strict" the hitbox should be
+        float tolerance = 50.f; // tweak this to change the hit box of the player
 
         return (std::abs(playerX - ballX) < tolerance) &&
             (std::abs(playerY - ballY) < tolerance);
@@ -107,12 +107,32 @@ public:
     
 
 
+    void decrementPlayerHealth()
+    {
+        if (health > 0)
+        {
+            health -= 1;
+            
+        }
+    }
 
 
+    bool checkIfPlayerIsDead()
+    {
+        if (health == 0)
+        {
+            return true;
+            //end game and reset
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 private:
 
-
+    int health;
     float speed;
 };
 
