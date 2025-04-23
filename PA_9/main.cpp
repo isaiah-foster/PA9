@@ -102,10 +102,7 @@ int main()
 	highScoreLable.setFillColor(sf::Color::Red);
 	highScoreLable.setOrigin({ highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
 	highScoreLable.setPosition({ (float)windowSize.x / 2 + 500 * (windowSize.x / 1920), (float)windowSize.y * .93f });
-	//load highscore
 	
-
-
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
     float ballSpawnRate = 5;
@@ -125,8 +122,8 @@ int main()
 
 
     while (window.isOpen())
-    {                  
-            //keep program running until window closes
+    {
+        //keep program running until window closes
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -137,72 +134,69 @@ int main()
         if (ball_spawn_clock.getElapsedTime().asSeconds() >= ballSpawnRate)
         {
             Ball newBall(bookTextures[std::rand() % 3]);
-            float scale = 0.1f + ((float)(std::rand() % 5+1) / 60); // Between 0.1 and .15
+            float scale = 0.1f + ((float)(std::rand() % 5 + 1) / 60); // Between 0.1 and .15
             newBall.setScale({ scale, scale });
             balls.push_back(newBall);
             ball_spawn_clock.restart();
-			if (ballSpawnRate > 1) ballSpawnRate -= 0.1f; // Decrease spawn rate to increase difficulty
+            if (ballSpawnRate > 1) ballSpawnRate -= 0.1f; // Decrease spawn rate to increase difficulty
             std::cout << "Number of balls: " << balls.size() << std::endl;
         }
 
         //spawn in a new pencil if pencil is shot
-		if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
+        if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
         {
-                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
-            }
+            // pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
 
-                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
-            }
 
-			Pencil newPencil(pencilTex, player.getPosition());
-			pencils.push_back(newPencil);
-			pencil_spawn_clock.restart();
+            Pencil newPencil(pencilTex, player.getPosition());
+            pencils.push_back(newPencil);
+            pencil_spawn_clock.restart();
+        }
 
-		}
 
         //update all objects//
-        
-        
+
+
         //update all balls
         for (auto& ball : balls)
         {
             ball.update(window.getSize());
-			if (ball.getHealth() <= 0)
-			{
-                score+= ball.getOriginalHealth()*8;
-				//remove the ball from the vector if destoryed
-				ball.setHealth(0);
-				balls.erase(std::remove_if(balls.begin(), balls.end(), [](const Ball& b) { return b.getHealth() <= 0; }), balls.end());
+            if (ball.getHealth() <= 0)
+            {
+                score += ball.getOriginalHealth() * 8;
+                //remove the ball from the vector if destoryed
+                ball.setHealth(0);
+                balls.erase(std::remove_if(balls.begin(), balls.end(), [](const Ball& b) { return b.getHealth() <= 0; }), balls.end());
                 scoreLabel.setString("Score = " + std::to_string(score));
-			}
+            }
         }
-        
 
 
-		//update all pencils
+
+        //update all pencils
         for (auto& pencil : pencils)
         {
-			pencil.update(window, laserSound, player);
+            pencil.update(window, laserSound, player);
             if ((pencil.getIsHit() || pencil.getPosition().y < 0) && pencils.size() > 2)
             {
-				//remove the pencil from the vector if it hits a book
+                //remove the pencil from the vector if it hits a book
                 pencils.erase(std::remove_if(pencils.begin(), pencils.end(), [](const Pencil& p) { return p.getIsHit() || p.getPosition().y < 0; }), pencils.end());
             }
         }
 
-      
-		//check if pencils have hit a ball and if balls have hit the player
+
+        //check if pencils have hit a ball and if balls have hit the player
         for (auto& ball : balls)
         {
-            if (checkIfPlayerIsHit(player, ball) && hitRestrictor.getElapsedTime().asSeconds() >=1)
+            if (checkIfPlayerIsHit(player, ball) && hitRestrictor.getElapsedTime().asSeconds() >= 1)
             {
                 player.setHealth(player.getHealth() - 1);
                 healthLabel.setString("Health = " + std::to_string(player.getHealth()));
-				hitRestrictor.restart();
+                hitRestrictor.restart();
             }
             for (auto& pencil : pencils)
             {
-				checkShotHit(pencil, ball);
+                checkShotHit(pencil, ball);
             }
         }
 
@@ -216,9 +210,9 @@ int main()
 
         window.draw(background);
         window.draw(player);
-		window.draw(scoreLabel);
+        window.draw(scoreLabel);
         window.draw(healthLabel);
-		window.draw(highScoreLable);
+        window.draw(highScoreLable);
 
         //draw all balls
         for (const auto& ball : balls)
@@ -226,31 +220,33 @@ int main()
             window.draw(ball);
         }
 
-		//draw all pencils
-		for (const auto& pencil : pencils)
-		{
-			window.draw(pencil);
-		}
+        //draw all pencils
+        for (const auto& pencil : pencils)
+        {
+            window.draw(pencil);
+        }
 
         //display window to screen
         window.display();
 
-		if (player.getHealth() <= 0)
-		{
-			std::cout << "Game Over!" << std::endl;
+        if (player.getHealth() <= 0)
+        {
+            std::cout << "Game Over!" << std::endl;
 
-			player.setPosition({ (float)windowSize.x / 2.f, (float)windowSize.y / 1.5f });
-			window.clear();
+            player.setPosition({ (float)windowSize.x / 2.f, (float)windowSize.y / 1.5f });
+            window.clear();
             GameOverScreen gameOverScreen(background.getTexture(), player.getTexture(), font, windowSize);
             gameOverScreen.run(window);
             ballSpawnRate = 5;
             highScoreLable.setString("High Score= " + std::to_string(checkHighScore(score)));
             score = 0;
-			scoreLabel.setString("Score = 0");
+            scoreLabel.setString("Score = 0");
             player.setHealth(5);
-			healthLabel.setString("Health = 5");
+            healthLabel.setString("Health = 5");
             balls.clear();
-		}
+        }
     }
+    
     return 0;
+
 }

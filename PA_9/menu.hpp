@@ -102,8 +102,3 @@ private:
     sf::Text menuCont;
 
 };
-
-
-
-
-

@@ -216,6 +216,7 @@
     <ClInclude Include="pencil.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="ScoreBoard.hpp" />
+    <ClInclude Include="testCases.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="badguy.mp3" />
