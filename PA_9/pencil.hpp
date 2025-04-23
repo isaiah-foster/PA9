@@ -67,15 +67,6 @@ public:
 
 
 
-       
-
-
-
-
-       
-
-
-
        move(movement);
    }
 

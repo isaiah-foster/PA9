@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "menu.hpp"
 #include "player.hpp"
@@ -7,6 +8,7 @@
 #include "target.hpp"
 #include "classInteractions.hpp"
 #include "pencil.hpp"
+
 
 
 int main()
@@ -30,12 +32,19 @@ int main()
     sf::Music laserSound;
     laserSound.openFromFile("LaserGunPew.wav");
 
+    sf::Music explosion;
+    explosion.openFromFile("explosion.mp3");
 
     sf::Music track1;
     track1.openFromFile("track1.mp3");
 
+    sf::Music hitmarker;
+    hitmarker.openFromFile("hitmarker.mp3");
+
 
     track1.setVolume(50.0);
+
+    laserSound.setVolume(40.0);
 
 
     sf::Texture backgroundTexture;
@@ -56,20 +65,27 @@ int main()
     Target ball1;
 
     bool pencil1fired = false;
-    //bool pencil2fired = false;
 
+    sf::Clock clock;
 
-    int ballHealth = 20;
 
 
     while (window.isOpen())
     {
+
 
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
+
+        //For flashing lights on ball
+        float deltaTime = clock.restart().asSeconds();
+        ball1.update(deltaTime);
+        //
+
+
 
         window.clear();
         window.draw(backgroundSprite);
@@ -80,7 +96,15 @@ int main()
         window.draw(ball1);
 
 
-        window.setFramerateLimit(120);
+
+        
+
+
+
+
+        
+
+        window.setFramerateLimit(110);
 
         window.display();
 
@@ -89,7 +113,9 @@ int main()
         playerShip.playerActions(window, true);
         pencilGun1.pencilActions(window, laserSound);
 
-        classInteractions::interactionHandler(laserSound, pencil1fired, pencilGun1, ball1, playerShip, ballHealth);
+        classInteractions::interactionHandler(laserSound, pencil1fired, pencilGun1, ball1, playerShip, explosion, hitmarker);
+
+        
 
     }
 }

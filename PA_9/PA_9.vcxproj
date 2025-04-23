@@ -199,7 +199,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="target.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Z:\Downloads\PlayerShip.png" />
@@ -208,6 +207,7 @@
     <ClInclude Include="background.hpp" />
     <ClInclude Include="classInteractions.hpp" />
     <ClInclude Include="ball.hpp" />
+    <ClInclude Include="audioManager.hpp" />
     <ClInclude Include="pencil.hpp" />
     <ClInclude Include="target.hpp" />
     <ClInclude Include="menu.hpp" />

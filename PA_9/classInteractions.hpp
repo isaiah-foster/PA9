@@ -4,6 +4,7 @@
 #define CLASSINTERACTIONS_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <cmath>
 #include "player.hpp"
@@ -19,6 +20,14 @@ private:
 
 
 public:
+
+
+    
+
+   
+
+
+
 
     static bool checkShotHit(const Pencil& bullet, const Target& enemy)
     {
@@ -47,8 +56,10 @@ public:
 
 
     //handles 
-    static void interactionHandler(sf::Music& laserSound, bool pencil1fired, Pencil& pencilGun1, Target& ball1, Player& playerShip, int ballHealth)
+    static void interactionHandler(sf::Music& laserSound, bool pencil1fired, Pencil& pencilGun1, Target& ball1, Player& playerShip, sf::Music& explosion, sf::Music& hitmarker)
     {
+
+
 
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !pencil1fired)
@@ -73,21 +84,31 @@ public:
 
         if (classInteractions::checkShotHit(pencilGun1, ball1))
         {
+            
+            hitmarker.play();
+
+
+            if (ball1.getHealth() == 0)
+            {
+                explosion.play();
+            }
+
 
             std::cout << "TARGET HIT!\n" << std::endl;
-            ballHealth--;
         }
         else
         {
 
-            std::cout << "BIG BALLS NOT HIT!\n" << std::endl;
+            //std::cout << "BIG BALLS NOT HIT!\n" << std::endl;
 
         }
 
 
+        
 
 
-        if ((pencil1fired && pencilGun1.getPosition().y < 100) || (classInteractions::checkShotHit(pencilGun1, ball1)))
+
+        if ((pencil1fired && pencilGun1.getPosition().y < 100))
         {
 
 
@@ -100,6 +121,13 @@ public:
         }
 
 
+        if (classInteractions::checkShotHit(pencilGun1, ball1))
+        {
+            pencilGun1.setPosition(playerShip.getPosition() + sf::Vector2f(37.5f, 0.f));
+
+            ball1.decrementHealth();
+        }
+
         if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)))
         {
 
@@ -107,11 +135,11 @@ public:
 
         }
 
-        ball1.setHealth(ballHealth);
+
+        std::cout << ball1.getHealth() << std::endl;
 
 
         
-
     }
 
 };
