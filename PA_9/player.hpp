@@ -4,6 +4,7 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "ball.hpp"
 
 class Player : public sf::Sprite 
 {
@@ -75,7 +76,7 @@ public:
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R) && isSpaceShip)
         {
-            std::cout << "current speed: " << movement.x << "  " << movement.y << std::endl;
+           // std::cout << "current speed: " << movement.x << "  " << movement.y << std::endl;
 
         }
         
@@ -88,7 +89,20 @@ public:
 
 
 
-    
+    //this function checks if the player is hit by a target/book
+    static bool checkIfPlayerIsHit(const Player& player, const Ball& ball)
+    {
+        float playerX = player.getPosition().x;
+        float playerY = player.getPosition().y;
+
+        float ballX = ball.getPosition().x;
+        float ballY = ball.getPosition().y;
+
+        float tolerance = 50.f; // tweak this for how "strict" the hitbox should be
+
+        return (std::abs(playerX - ballX) < tolerance) &&
+            (std::abs(playerY - ballY) < tolerance);
+    }
 
     
 

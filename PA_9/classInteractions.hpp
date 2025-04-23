@@ -22,12 +22,6 @@ private:
 public:
 
 
-    
-
-   
-
-
-
 
     static bool checkShotHit(const Pencil& bullet, const Target& enemy)
     {
@@ -41,7 +35,7 @@ public:
             float enemyY = enemy.getPosition().y;
 
 
-            float tolerance = 50.f; // adjust this to change hitboxes
+            float tolerance = 60.f; // adjust this to change hitboxes
 
 
             return (std::abs(bulletX - enemyX) < tolerance) &&
@@ -51,7 +45,6 @@ public:
 
         return false;
     }
-
 
 
 

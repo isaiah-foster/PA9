@@ -36,7 +36,7 @@ int main()
     explosion.openFromFile("explosion.mp3");
 
     sf::Music track1;
-    track1.openFromFile("track1.mp3");
+    track1.openFromFile("track3.mp3");
 
     sf::Music hitmarker;
     hitmarker.openFromFile("hitmarker.mp3");
