@@ -6,6 +6,7 @@
 #include <ctime>
 #include "pencil.hpp"
 #include "ball.hpp"
+#include <iostream>
 
 
 //Set window to fullscreen, set framerate limit, and return window size

@@ -21,14 +21,20 @@ int main()
     sf::RenderWindow window = initWindow();
     sf::Vector2u windowSize = window.getSize();
 
-    //Start game in the menu
-    Menu menu;
-    menu.startMenu();
+    
 
-    //load background music
-    sf::Music track1;
-    track1.openFromFile("track1.mp3");
-    track1.play();
+    //load menu background music
+    sf::Music menuMusic;
+    menuMusic.openFromFile("danceWeapon4.mp3");
+    menuMusic.setVolume(15);
+    menuMusic.play();
+    menuMusic.setLooping(true);
+
+    //load in-game background music
+    sf::Music gameMusic;
+    gameMusic.openFromFile("track1.mp3");
+    gameMusic.setVolume(20);
+    
 
     //load player
     Player player = loadPlayer(window);
@@ -78,6 +84,7 @@ int main()
         std::cerr << "Failed to load font!" << std::endl;
         return -1; // Exit the program if the font fails to load
     }
+
 	sf::Text scoreLabel(font, "Score = 0");
 	scoreLabel.setCharacterSize(50);
 	scoreLabel.setFillColor(sf::Color::Green);
@@ -96,9 +103,22 @@ int main()
     float ballSpawnRate = 5;
     float pencilSpawnRate = 50.f;
 
+
+
+    //Start game in the menu
+    Menu menu(background.getTexture(), player.getTexture(), font, windowSize);
+    menu.startMenu(window);
+
+    menuMusic.stop();
+
+    gameMusic.play();
+    gameMusic.setLooping(true);
+
+
+
     while (window.isOpen())
-    {
-        //keep program running until window closes
+    {                  
+            //keep program running until window closes
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -134,7 +154,7 @@ int main()
         //update all objects//
         
         
-        //ipdate all balls
+        //update all balls
         for (auto& ball : balls)
         {
             ball.update(window.getSize());

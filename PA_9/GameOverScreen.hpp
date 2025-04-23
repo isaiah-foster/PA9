@@ -8,7 +8,7 @@ class GameOverScreen {
 public:
     GameOverScreen(const sf::Texture& backgroundTexture, const sf::Texture& playerTexture, const sf::Font& font, sf::Vector2u windowSize)
         : background(backgroundTexture), player({ (float)windowSize.x, (float)windowSize.y }, playerTexture), 
-        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press Escape To Play Again", 50)
+        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press ESCAPE To Play Again", 50), menuCont(font, "Or Press E to Exit", 50)
     {
         //set up the background
         background.setPosition({ 0,0 });
@@ -20,22 +20,30 @@ public:
         //set up the player
         player.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 2 });
         player.setScale({ 0.5f, 0.5f }); // Adjust scale as needed
-        player.setOrigin({ player.getGlobalBounds().size.x / 2, player.getGlobalBounds().size.y / 2 });
+        player.setOrigin({ player.getGlobalBounds().size.x / 1, player.getGlobalBounds().size.y / 2 });
 
         //set up the "Game Over" text
         gameOverText.setFillColor(sf::Color::Red);
         gameOverText.setOrigin({ gameOverText.getGlobalBounds().size.x / 2, gameOverText.getGlobalBounds().size.y / 2 });
-        gameOverText.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 4.1f });
+        gameOverText.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 5.5f });
 
         //set up escape text
         escapeCont.setFillColor(sf::Color::Red);
         escapeCont.setOrigin({ escapeCont.getGlobalBounds().size.x / 2, escapeCont.getGlobalBounds().size.y / 2 });
-        escapeCont.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 2.85f });
+        escapeCont.setPosition({ (float)windowSize.x / 2, (float)windowSize.y / 3.45f });
+
+
+
+        //set up go-to-menu option text
+        menuCont.setFillColor(sf::Color::Red);
+        menuCont.setOrigin({ escapeCont.getGlobalBounds().size.x / 2, escapeCont.getGlobalBounds().size.y / 2 });
+        menuCont.setPosition({ (float)windowSize.x / 1.7f, (float)windowSize.y / 2.8f });
+
 
     }
 
-    //function to run the game over screen
-    bool run(sf::RenderWindow& window) {
+    //function to run the game over screen  
+    void run(sf::RenderWindow & window) {
         while (window.isOpen())
         {
             while (const std::optional event = window.pollEvent())
@@ -45,7 +53,14 @@ public:
             }
             //restart the game if Escape is pressed
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-                return true;
+            {
+                return;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+            {
+                exit(0);
+            }
+                
 
 
             //draw the game over screen
@@ -54,10 +69,11 @@ public:
             window.draw(player);
             window.draw(gameOverText);
 			window.draw(escapeCont);
+            window.draw(menuCont);
             window.display();
             
         }
-        return false; //if the window is closed, do not restart
+        return; //if the window is closed, do not restart
     }
 
 
@@ -66,4 +82,6 @@ private:
     Player player;
     sf::Text gameOverText;
     sf::Text escapeCont;
+    sf::Text menuCont;
+    
 };
