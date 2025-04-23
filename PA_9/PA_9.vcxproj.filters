@@ -58,9 +58,6 @@
     <ClInclude Include="ScoreBoard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="textLabel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

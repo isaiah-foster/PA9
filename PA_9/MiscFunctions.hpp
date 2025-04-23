@@ -7,6 +7,7 @@
 #include "pencil.hpp"
 #include "ball.hpp"
 #include <iostream>
+#include <fstream>
 
 
 //Set window to fullscreen, set framerate limit, and return window size
@@ -95,4 +96,35 @@ static bool checkIfPlayerIsHit(Player& player, const Ball& ball)
 		return true;
 	}
 	return false;
+}
+
+int checkHighScore(int cur)
+{
+	//opens the highscore file to read
+	std::ifstream file("HighScore.txt");
+	if (!file.is_open())
+	{
+		std::cerr << "Error opening high score file." << std::endl;
+		return -1;
+	}
+	int highScore;
+	file >> highScore;
+	file.close();
+	//checks if the current score is higher than the highscore
+	if (cur > highScore)
+	{
+		std::ofstream file("HighScore.txt");
+		if (!file.is_open())
+		{
+			std::cerr << "Error opening high score file." << std::endl;
+			return -1;
+		}
+		file << cur;
+		file.close();
+		return cur;
+	}
+	else
+	{
+		return highScore;
+	}
 }

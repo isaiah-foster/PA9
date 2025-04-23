@@ -7,8 +7,8 @@
 #include "Windows.h"
 #include "MiscFunctions.hpp"
 #include <vector>
+#include <string>
 #include "pencil.hpp"
-#include "textLabel.hpp"
 #include "ScoreBoard.hpp"
 #include "GameOverScreen.hpp"
 
@@ -97,6 +97,14 @@ int main()
     healthLabel.setOrigin({ healthLabel.getGlobalBounds().size.x / 2, healthLabel.getGlobalBounds().size.y / 2 });
     healthLabel.setPosition({ (float)windowSize.x / 2 - 500 *(windowSize.x/1920), (float)windowSize.y * .93f});
 
+	sf::Text highScoreLable(font, "High Score = 0");
+	highScoreLable.setCharacterSize(50);
+	highScoreLable.setFillColor(sf::Color::Red);
+	highScoreLable.setOrigin({ highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
+	highScoreLable.setPosition({ (float)windowSize.x / 2 + 500 * (windowSize.x / 1920), (float)windowSize.y * .93f });
+	//load highscore
+	
+
 
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
@@ -139,12 +147,7 @@ int main()
 
         //spawn in a new pencil if pencil is shot
 		if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
-		{
-            if (pencils.size() >= 25)
-            {
-                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
-            }
-
+        {
 			Pencil newPencil(pencilTex, player.getPosition());
 			pencils.push_back(newPencil);
 			pencil_spawn_clock.restart();
@@ -160,7 +163,7 @@ int main()
             ball.update(window.getSize());
 			if (ball.getHealth() <= 0)
 			{
-                score+= ball.getOriginalHealth();
+                score+= ball.getOriginalHealth()*8;
 				//remove the ball from the vector if destoryed
 				ball.setHealth(0);
 				balls.erase(std::remove_if(balls.begin(), balls.end(), [](const Ball& b) { return b.getHealth() <= 0; }), balls.end());
@@ -172,7 +175,7 @@ int main()
         for (auto& pencil : pencils)
         {
 			pencil.update(window, laserSound, player);
-            if (pencil.getIsHit() || pencil.getPosition().y < 0)
+            if ((pencil.getIsHit() || pencil.getPosition().y < 0) && pencils.size() > 2)
             {
 				//remove the pencil from the vector if it hits a book
                 pencils.erase(std::remove_if(pencils.begin(), pencils.end(), [](const Pencil& p) { return p.getIsHit() || p.getPosition().y < 0; }), pencils.end());
@@ -207,6 +210,7 @@ int main()
         window.draw(player);
 		window.draw(scoreLabel);
         window.draw(healthLabel);
+		window.draw(highScoreLable);
 
         //draw all balls
         for (const auto& ball : balls)
@@ -232,6 +236,7 @@ int main()
             GameOverScreen gameOverScreen(background.getTexture(), player.getTexture(), font, windowSize);
             gameOverScreen.run(window);
             ballSpawnRate = 5;
+            highScoreLable.setString("High Score= " + std::to_string(checkHighScore(score)));
             score = 0;
 			scoreLabel.setString("Score = 0");
             player.setHealth(5);

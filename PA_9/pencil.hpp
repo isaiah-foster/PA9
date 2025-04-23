@@ -13,7 +13,7 @@ public:
         setScale(sf::Vector2f(0.1f, 0.1f));//adjust to change pencil size
 		isShooting = false;
 		isHit = false;
-        speed = 20;
+        speed = 30;
    }
 
    void update(const sf::RenderWindow& window, sf::Music& laserSound, Player player)
