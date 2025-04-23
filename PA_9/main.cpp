@@ -172,10 +172,10 @@ int main()
         for (auto& pencil : pencils)
         {
 			pencil.update(window, laserSound, player);
-            if (pencil.getIsHit())
+            if (pencil.getIsHit() || pencil.getPosition().y < 0)
             {
 				//remove the pencil from the vector if it hits a book
-				pencils.erase(std::remove_if(pencils.begin(), pencils.end(), [](const Pencil& p) { return p.getIsHit(); }), pencils.end());
+                pencils.erase(std::remove_if(pencils.begin(), pencils.end(), [](const Pencil& p) { return p.getIsHit() || p.getPosition().y < 0; }), pencils.end());
             }
         }
 
