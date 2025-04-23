@@ -14,10 +14,10 @@ public:
        setPosition(sf::Vector2f{ static_cast<float> (std::rand() % desktop.size.x) , -getGlobalBounds().size.y});
 	   scale = (float)desktop.size.x / 1920;
        float scales[2] = { scale, -scale };
-	   velocity.x *= scales[rand()%2]; // random x axis direction at start
+	   velocity.x *= scales[rand()%30]; // random x axis direction at start
 	   velocity.y *= scale;
        setScale({ scale, scale });
-       originalHealth = health = rand()%10 +20;
+       originalHealth = health = rand()%10 +5;
      
    }  
 

@@ -48,7 +48,7 @@ void loadBall()
 	bookTextures[2].loadFromFile("Book3.png");
 	Ball ball(bookTextures[std::rand() % 3]);
 	float scale = 0.05f + (static_cast<float>(std::rand() % 5 + 1) / 20); //Between 0.05 and 0.2
-	ball.setHealth(rand() % 20 + 20);
+	ball.setHealth(rand() % 5 + 8);
 	ball.setScale({ scale, scale });
 }
 
