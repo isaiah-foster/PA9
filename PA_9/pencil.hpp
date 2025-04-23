@@ -23,7 +23,7 @@ public:
 
 	   if (!isShooting)
 	   {
-           setPosition(player.getPosition());
+           setPosition({ player.getPosition().x + 30, player.getPosition().y-10});
 	   }
 
        //movement for already been shot
