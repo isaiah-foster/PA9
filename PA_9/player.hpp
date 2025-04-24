@@ -21,15 +21,15 @@ public:
 	void setHealth(int newHealth) { health = newHealth; }
 
 private:
-    sf::Texture texture; // Store the texture as a member variable
+    sf::Texture texture;
     float speed;
     int health;
 };
 
 Player::Player(sf::Vector2f position, const sf::Texture& playerTexture)
-    : sf::Sprite(playerTexture), texture(playerTexture) // Initialize the member texture
+    : sf::Sprite(playerTexture), texture(playerTexture)
 {
-    setTexture(texture); // Use the member texture
+    setTexture(texture);
     setPosition({ position.x / 2, position.y / 1.5f });
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     setScale({ PLAYER_SCALE * desktop.size.x / 1920, PLAYER_SCALE * desktop.size.x / 1920 });
@@ -40,7 +40,7 @@ Player::Player(sf::Vector2f position, const sf::Texture& playerTexture)
 
 void Player::movePlayer(sf::Vector2u windowSize)
 {
-	// Get the size of the texture
+	
     sf::Vector2u spriteSize = (getTexture().getSize());
 
     sf::Vector2f position = getPosition();
