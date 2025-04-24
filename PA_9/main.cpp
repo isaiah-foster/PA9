@@ -98,11 +98,19 @@ int main()
     healthLabel.setOrigin({ healthLabel.getGlobalBounds().size.x / 2, healthLabel.getGlobalBounds().size.y / 2 });
     healthLabel.setPosition({ (float)windowSize.x / 2 - 500 *(windowSize.x/1920), (float)windowSize.y * .93f});
 
-	sf::Text highScoreLable(font, "High Score = 0");
+
+    //open high score file to get initial read
+	std::ifstream file("HighScore.txt");
+    std::string line;
+	std::getline(file, line);
+    file.close();
+	
+
+	sf::Text highScoreLable(font, "High Score = " + line);
 	highScoreLable.setCharacterSize(50);
 	highScoreLable.setFillColor(sf::Color::Red);
 	highScoreLable.setOrigin({ highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
-	highScoreLable.setPosition({ (float)windowSize.x / 2 + 500 * (windowSize.x / 1920), (float)windowSize.y * .93f });
+	highScoreLable.setPosition({ (float)windowSize.x / 2 + 800 * (windowSize.x / 1920), (float)windowSize.y * .93f });
 	
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
@@ -146,9 +154,6 @@ int main()
         //spawn in a new pencil if pencil is shot
         if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
         {
-            // pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
-
-
             Pencil newPencil(pencilTex, player.getPosition());
             pencils.push_back(newPencil);
             pencil_spawn_clock.restart();
@@ -209,8 +214,9 @@ int main()
 
         //draw all objects back to screen//
 
+
+
         window.draw(background);
-        window.draw(player);
         window.draw(scoreLabel);
         window.draw(healthLabel);
         window.draw(highScoreLable);
@@ -226,6 +232,7 @@ int main()
         {
             window.draw(pencil);
         }
+        window.draw(player);
 
         //display window to screen
         window.display();
