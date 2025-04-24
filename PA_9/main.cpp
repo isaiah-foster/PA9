@@ -16,6 +16,10 @@
 
 int main()
 {
+
+    //run test cases
+	TestCases test;
+	test.testAll();
     
     //Seed random time
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -116,14 +120,6 @@ int main()
     gameMusic.play();
     gameMusic.setLooping(true);
 
-
-
-
-    //test audio
-    if (!testAudioFilesLoaded()) {
-        std::cerr << "One or more audio files failed to load. Exiting." << std::endl;
-        return -1;
-    }
 
 
 

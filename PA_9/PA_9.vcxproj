@@ -210,7 +210,6 @@
   <ItemGroup>
     <ClInclude Include="ball.hpp" />
     <ClInclude Include="background.hpp" />
-    <ClInclude Include="GameOverInherited.hpp" />
     <ClInclude Include="GameOverScreen.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="MiscFunctions.hpp" />
@@ -234,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="HighScore.txt" />
+    <Text Include="README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

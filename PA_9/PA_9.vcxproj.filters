@@ -55,13 +55,10 @@
     <ClInclude Include="pencil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScreen.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="testCases.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverInherited.hpp">
+    <ClInclude Include="GameOverScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="HighScore.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="README.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
