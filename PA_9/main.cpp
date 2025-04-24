@@ -10,10 +10,17 @@
 #include <string>
 #include "pencil.hpp"
 #include "GameOverScreen.hpp"
+#include "testCases.hpp"
+
 
 
 int main()
 {
+
+    //run test cases
+	TestCases test;
+	test.testAll();
+    
     //Seed random time
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
@@ -112,6 +119,7 @@ int main()
 
     gameMusic.play();
     gameMusic.setLooping(true);
+
 
 
 
