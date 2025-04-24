@@ -37,7 +37,7 @@ public:
             sf::Music testMusic;
             if (!testMusic.openFromFile(file))
             {
-                std::cerr << "Error: Failed to load audio file: " << file << std::endl;
+                std::cout << "Error: Failed to load audio file: " << file << std::endl;
                 allLoaded = false;
                 return false;
             }
@@ -49,8 +49,6 @@ public:
         }
         return allLoaded;
     }
-
-
 
 
 
@@ -79,10 +77,6 @@ public:
 
         return allLoaded;
     }
-
-
-
-
 
 
     bool testProjectileCleanupWithoutImage()
