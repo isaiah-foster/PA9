@@ -5,16 +5,16 @@
 #define BOUNCE_RNDM .1
 #define BASE_SPEED 5
 
-class Ball : public sf::Sprite {  
+class Book : public sf::Sprite {  
 public:  
-   Ball(const sf::Texture& tex) : sf::Sprite(tex), velocity(sf::Vector2f{ -BASE_SPEED, -BASE_SPEED })
+   Book(const sf::Texture& tex) : sf::Sprite(tex), velocity(sf::Vector2f{ -BASE_SPEED, -BASE_SPEED })
    {
        sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
        setOrigin(sf::Vector2f{static_cast<float>(tex.getSize().x/2) , static_cast<float>(tex.getSize().y) / 2.f});
        setPosition(sf::Vector2f{ static_cast<float> (std::rand() % desktop.size.x) , -getGlobalBounds().size.y});
 	   scale = (float)desktop.size.x / 1920;
        float scales[2] = { scale, -scale };
-	   velocity.x *= scales[rand()%30]; // random x axis direction at start
+	   velocity.x *= (float)scales[rand()%30]; // random x axis direction at start
 	   velocity.y *= scale;
        setScale({ scale, scale });
        originalHealth = health = rand()%10 +5;
@@ -45,7 +45,7 @@ private:
    int originalHealth;
 };
 
-void Ball::update(sf::Vector2u windowSize) {  
+void Book::update(sf::Vector2u windowSize) {  
 
    moderateSpeed(); // keep speed in check
 
@@ -55,7 +55,7 @@ void Ball::update(sf::Vector2u windowSize) {
 
 }
 
-void Ball::moderateSpeed() 
+void Book::moderateSpeed() 
 {
     if (velocity.x > MAX_SPEED*scale)
         velocity.x = MAX_SPEED * scale;
@@ -67,7 +67,7 @@ void Ball::moderateSpeed()
         velocity.y = MAX_SPEED * scale;
 }
 
-void Ball::bounce(sf::Vector2u &windowSize)
+void Book::bounce(sf::Vector2u &windowSize)
 {
     const float bounceFactor = 1.0f;
     sf::Vector2f pos = getPosition();

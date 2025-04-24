@@ -43,17 +43,8 @@ public:
         menuCont.setOrigin({ escapeCont.getGlobalBounds().size.x / 2, escapeCont.getGlobalBounds().size.y / 2 });
         menuCont.setPosition({ (float)windowSize.x / 2.4f, (float)windowSize.y / 3.0f });
 
-
-
-
-
-
     }
 
-
-
-
-	
 
     //function to run the game over screen
     int startMenu(sf::RenderWindow& window) {
@@ -71,14 +62,6 @@ public:
             {
                 return 1;
             }
-
-
-
-
-            //HERE an option should be given to the player to choose the difficulty:
-
-
-
 
             //draw the game over screen
             window.clear();

@@ -215,7 +215,6 @@
     <ClInclude Include="MiscFunctions.hpp" />
     <ClInclude Include="pencil.hpp" />
     <ClInclude Include="player.hpp" />
-    <ClInclude Include="ScoreBoard.hpp" />
     <ClInclude Include="testCases.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +223,7 @@
     <Media Include="danceWeapon4.mp3" />
     <Media Include="danceWeapon5.mp3" />
     <Media Include="LaserGunPew.wav" />
+    <Media Include="pencil_hit.mp3" />
     <Media Include="track1.mp3" />
     <Media Include="track3.mp3" />
   </ItemGroup>

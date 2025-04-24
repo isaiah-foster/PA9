@@ -55,9 +55,6 @@
     <ClInclude Include="pencil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreBoard.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,6 +82,9 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="track3.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="pencil_hit.mp3">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

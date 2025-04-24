@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 
+using sf::Text;
 
 //Set window to fullscreen, set framerate limit, and return window size
 sf::RenderWindow initWindow()
@@ -48,14 +49,14 @@ void loadBall()
 	bookTextures[0].loadFromFile("Book.png");
 	bookTextures[1].loadFromFile("Book2.png");
 	bookTextures[2].loadFromFile("Book3.png");
-	Ball ball(bookTextures[std::rand() % 3]);
+	Book ball(bookTextures[std::rand() % 3]);
 	float scale = 0.05f + (static_cast<float>(std::rand() % 5 + 1) / 20); //Between 0.05 and 0.2
 	ball.setHealth(rand() % 5 + 8);
 	ball.setScale({ scale, scale });
 }
 
 //checks if the pencil has hit the target
-static bool checkShotHit(Pencil& bullet, Ball& enemy)
+static bool checkShotHit(Pencil& bullet, Book& enemy)
 {
 	if (bullet.getIsShooting())
 	{
@@ -80,23 +81,20 @@ static bool checkShotHit(Pencil& bullet, Ball& enemy)
 	return false;
 }
 
-//this function checks if the player is hit by a target/book
-static bool checkIfPlayerIsHit(Player& player, const Ball& ball)
+
+//checks if the player has been hit by a book
+static bool checkIfPlayerIsHit(Player& player, const Book& ball)
 {
-	float playerX = player.getPosition().x;
-	float playerY = player.getPosition().y;
-
-	float ballX = ball.getPosition().x;
-	float ballY = ball.getPosition().y;
-
-	float tolerance = 50.f; // tweak this to change the hit box of the player
-
-	if (std::abs(playerX - ballX) < tolerance && std::abs(playerY - ballY) < tolerance)
-	{
+	//fet the bounding boxesof the player and the book
+	sf::FloatRect playerBounds = player.getGlobalBounds();
+	sf::FloatRect ballBounds = ball.getGlobalBounds();
+	// Check if the bounding boxes intersect
+	if (auto intersection = playerBounds.findIntersection(ballBounds)) {
 		return true;
 	}
 	return false;
 }
+
 
 int checkHighScore(int cur)
 {
@@ -127,4 +125,44 @@ int checkHighScore(int cur)
 	{
 		return highScore;
 	}
+}
+
+
+void loadTexts(sf::RenderWindow& window, sf::Font& font, sf::Text& scoreLabel, sf::Text& healthLabel, sf::Text& highScoreLable)
+{
+
+	//determine scale based on monitor
+	sf::Vector2u windowSize = window.getSize();
+	float scale = (float)windowSize.x / 1920;
+
+	//set font and scale for score and health labels
+	scoreLabel.setFont(font);
+	scoreLabel.setString("Score: 0");
+	scoreLabel.setCharacterSize(30);
+	scoreLabel.setFillColor(sf::Color::Green);
+	scoreLabel.setOrigin({ scoreLabel.getGlobalBounds().size.x / 2, scoreLabel.getGlobalBounds().size.y / 2 });
+	scoreLabel.setPosition({ (float)windowSize.x / 2, (float)windowSize.y * .93f });
+
+	healthLabel.setString("5 HP");
+	healthLabel.setFont(font);
+	healthLabel.setCharacterSize(30);
+	healthLabel.setFillColor(sf::Color::Red);
+	healthLabel.setOrigin({ healthLabel.getGlobalBounds().size.x / 2, healthLabel.getGlobalBounds().size.y / 2 });
+	healthLabel.setPosition({ (float)windowSize.x / 4, (float)windowSize.y * .93f });
+
+
+	//open highscore file to read
+	std::ifstream file("HighScore.txt");
+	std::string line;
+	std::getline(file, line);
+	file.close();
+
+	//set font and scale for highscore label
+	highScoreLable.setCharacterSize(30);
+	highScoreLable.setFillColor(sf::Color::Red);
+	highScoreLable.setFont(font);
+	highScoreLable.setString("High Score: " + line);
+	highScoreLable.setOrigin({ (float)highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
+	highScoreLable.setPosition({ (float)windowSize.x / 1.25f , (float)windowSize.y * .93f });
+
 }

@@ -9,7 +9,6 @@
 #include <vector>
 #include <string>
 #include "pencil.hpp"
-#include "ScoreBoard.hpp"
 #include "GameOverScreen.hpp"
 
 
@@ -18,37 +17,46 @@ int main()
     //Seed random time
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
+
     //Open window and return dimensions
     sf::RenderWindow window = initWindow();
     sf::Vector2u windowSize = window.getSize();
 
-    
 
     //load menu background music
     sf::Music menuMusic;
     menuMusic.openFromFile("danceWeapon4.mp3");
-    menuMusic.setVolume(15);
+    menuMusic.setVolume(10);
     menuMusic.play();
     menuMusic.setLooping(true);
+
 
     //load in-game background music
     sf::Music gameMusic;
     gameMusic.openFromFile("track1.mp3");
-    gameMusic.setVolume(20);
+    gameMusic.setVolume(15);
     
 
     //load player
     Player player = loadPlayer(window);
 
+
     //load background
     Background background = loadBackground();
+
 
     //track gamescore
     int score = 0;
     
+
     //load laser sound
     sf::Music laserSound;
     laserSound.openFromFile("LaserGunPew.wav");
+
+    //load collision sounds
+	sf::Music hitSound;
+	hitSound.openFromFile("pencil_hit.mp3");
+
 
     //load book textures
     sf::Texture bookTextures[3];
@@ -56,15 +64,17 @@ int main()
     bookTextures[1].loadFromFile("Book2.png");
     bookTextures[2].loadFromFile("Book3.png");
 
+
     //vectors to store books and pencils
-	std::vector<Ball> balls;
+	std::vector<Book> balls;
 	std::vector<Pencil> pencils; 
 
-    //first ball
-    Ball newBall(bookTextures[std::rand() % 3]);
+
+    //first book
+    Book firstBook(bookTextures[std::rand() % 3]);
     float scale = 0.1f + ((float)(std::rand() % 5+1) / 60); // Between 0.1 and .15
-    newBall.setScale({ scale, scale });
-    balls.push_back(newBall);
+    firstBook.setScale({ scale, scale });
+    balls.push_back(firstBook);
 
     //load first pencil in
     sf::Texture pencilTex;
@@ -73,52 +83,25 @@ int main()
 	pencils.push_back(pencil);
 
 
-    //initialize clocks to keep track of game time
+    //initialize clocks to keep track of spawn times
     sf::Clock ball_spawn_clock;
 	sf::Clock pencil_spawn_clock;
     sf::Clock hitRestrictor;
 
 
-    //make text stuff
-	sf::Font font;
-    if (!font.openFromFile("PressStart2P-Regular.ttf")) {
-        std::cerr << "Failed to load font!" << std::endl;
-        return -1; // Exit the program if the font fails to load
-    }
+    //load font
+    sf::Font font;
+    font.openFromFile("PressStart2P-Regular.ttf");
+	sf::Text scoreLabel(font);
+    sf::Text healthLabel(font);
+	sf::Text highScoreLable(font);
 
-
-	sf::Text scoreLabel(font, "Score = 0");
-	scoreLabel.setCharacterSize(30);
-	scoreLabel.setFillColor(sf::Color::Green);
-	scoreLabel.setOrigin({ scoreLabel.getGlobalBounds().size.x / 2, scoreLabel.getGlobalBounds().size.y / 2 });
-	scoreLabel.setPosition({ (float)windowSize.x /2 , (float)windowSize.y* .93f });
-
-
-    sf::Text healthLabel(font, "Health = 5");
-    healthLabel.setCharacterSize(50);
-    healthLabel.setFillColor(sf::Color::Red);
-    healthLabel.setOrigin({ healthLabel.getGlobalBounds().size.x / 2, healthLabel.getGlobalBounds().size.y / 2 });
-    healthLabel.setPosition({ (float)windowSize.x / 2 - 500 *(windowSize.x/1920), (float)windowSize.y * .93f});
-
-
-    //open high score file to get initial read
-	std::ifstream file("HighScore.txt");
-    std::string line;
-	std::getline(file, line);
-    file.close();
-	
-
-	sf::Text highScoreLable(font, "High Score = " + line);
-	highScoreLable.setCharacterSize(30);
-	highScoreLable.setFillColor(sf::Color::Red);
-	highScoreLable.setOrigin({ highScoreLable.getGlobalBounds().size.x / 2, highScoreLable.getGlobalBounds().size.y / 2 });
-    highScoreLable.setPosition({ (float)windowSize.x / 2 , (float)windowSize.y * .96f });
-
+    //set text settings
+	loadTexts(window, font, scoreLabel, healthLabel, highScoreLable);
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
     float ballSpawnRate = 5;
     float pencilSpawnRate = 50.f;
-
 
 
     //Start game in the menu
@@ -144,7 +127,7 @@ int main()
         //spawn a new ball every spawnRate seconds
         if (ball_spawn_clock.getElapsedTime().asSeconds() >= ballSpawnRate)
         {
-            Ball newBall(bookTextures[std::rand() % 3]);
+            Book newBall(bookTextures[std::rand() % 3]);
             float scale = 0.1f + ((float)(std::rand() % 5 + 1) / 60); // Between 0.1 and .15
             newBall.setScale({ scale, scale });
             balls.push_back(newBall);
@@ -174,8 +157,8 @@ int main()
                 score += ball.getOriginalHealth() * 8;
                 //remove the ball from the vector if destoryed
                 ball.setHealth(0);
-                balls.erase(std::remove_if(balls.begin(), balls.end(), [](const Ball& b) { return b.getHealth() <= 0; }), balls.end());
-                scoreLabel.setString("Score = " + std::to_string(score));
+                balls.erase(std::remove_if(balls.begin(), balls.end(), [](const Book& b) { return b.getHealth() <= 0; }), balls.end());
+                scoreLabel.setString("Score: " + std::to_string(score));
             }
         }
 
@@ -199,23 +182,28 @@ int main()
             if (checkIfPlayerIsHit(player, ball) && hitRestrictor.getElapsedTime().asSeconds() >= 1)
             {
                 player.setHealth(player.getHealth() - 1);
-                healthLabel.setString("Health = " + std::to_string(player.getHealth()));
+                healthLabel.setString(std::to_string(player.getHealth()) + " HP");
                 hitRestrictor.restart();
+				player.setColor(sf::Color::Red);
             }
             for (auto& pencil : pencils)
             {
-                checkShotHit(pencil, ball);
+                if(checkShotHit(pencil, ball)) hitSound.play();
             }
+			if (player.getColor() == sf::Color::Red && hitRestrictor.getElapsedTime().asSeconds() >= .5)
+			{
+				player.setColor(sf::Color::White);
+			}
         }
 
         //update player location & check hit
         player.movePlayer(window.getSize());
 
-        //clear screen
+        //clear screen between frames
         window.clear();
 
-        //draw all objects back to screen//
 
+        //draw all objects back to screen//
 
 
         window.draw(background);
@@ -239,20 +227,22 @@ int main()
         //display window to screen
         window.display();
 
+		//check if player has died
         if (player.getHealth() <= 0)
         {
             std::cout << "Game Over!" << std::endl;
 
+            //reset player position and stats and go to game over screen
             player.setPosition({ (float)windowSize.x / 2.f, (float)windowSize.y / 1.5f });
             window.clear();
             GameOverScreen gameOverScreen(background.getTexture(), player.getTexture(), font, windowSize);
             gameOverScreen.run(window);
             ballSpawnRate = 5;
-            highScoreLable.setString("High Score= " + std::to_string(checkHighScore(score)));
+            highScoreLable.setString("High Score: " + std::to_string(checkHighScore(score)));
             score = 0;
-            scoreLabel.setString("Score = 0");
+            scoreLabel.setString("Score: 0");
             player.setHealth(5);
-            healthLabel.setString("Health = 5");
+            healthLabel.setString("5 HP");
             balls.clear();
         }
     }
