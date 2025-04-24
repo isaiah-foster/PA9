@@ -3,7 +3,7 @@
 #include "menu.hpp"
 #include "player.hpp"
 #include "background.hpp"
-#include "ball.hpp"
+#include "Book.hpp"
 #include "Windows.h"
 #include "MiscFunctions.hpp"
 #include <vector>
@@ -12,7 +12,8 @@
 #include "GameOverScreen.hpp"
 #include "testCases.hpp"
 
-
+//set false if you dont want to run tests
+#define RUN_TESTS true
 
 int main()
 {
@@ -103,7 +104,7 @@ int main()
 	loadTexts(window, font, scoreLabel, healthLabel, highScoreLable);
 
 	//defines starting spawn rate of balls. decreases down to 3 seconds for difficulty increase
-    float ballSpawnRate = 5;
+    float bookSpawnRate = 4;
     float pencilSpawnRate = 50.f;
 
 
@@ -119,8 +120,11 @@ int main()
 
 
     //run test cases before gameloop begins
-    TestCases test;
-    test.testAll();
+    if(RUN_TESTS)
+    {
+        TestCases test;
+        test.testAll();
+    }
 
 
     while (window.isOpen())
@@ -133,14 +137,14 @@ int main()
         }
 
         //spawn a new ball every spawnRate seconds
-        if (ball_spawn_clock.getElapsedTime().asSeconds() >= ballSpawnRate)
+        if (ball_spawn_clock.getElapsedTime().asSeconds() >= bookSpawnRate)
         {
             Book newBall(bookTextures[std::rand() % 3]);
             float scale = 0.1f + ((float)(std::rand() % 5 + 1) / 60); // Between 0.1 and .15
             newBall.setScale({ scale, scale });
             balls.push_back(newBall);
             ball_spawn_clock.restart();
-            if (ballSpawnRate > 1) ballSpawnRate -= 0.1f; // Decrease spawn rate to increase difficulty
+            if (bookSpawnRate > 1) bookSpawnRate -= 0.1f; // Decrease spawn rate to increase difficulty
             std::cout << "Number of balls: " << balls.size() << std::endl;
         }
 
@@ -245,7 +249,7 @@ int main()
             window.clear();
             GameOverScreen gameOverScreen(background.getTexture(), player.getTexture(), font, windowSize);
             gameOverScreen.run(window);
-            ballSpawnRate = 5;
+            bookSpawnRate = 5;
             highScoreLable.setString("High Score: " + std::to_string(checkHighScore(score)));
             score = 0;
             scoreLabel.setString("Score: 0");

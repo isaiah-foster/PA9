@@ -1,5 +1,8 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include "pencil.hpp"
+#include "player.hpp"
+#include <vector>
 
 class TestCases
 {
@@ -8,16 +11,52 @@ public:
     //run all test cases
     bool testAll()
     {
-        if (testAudioFilesLoaded() && testTextureLoading() && testProjectileCleanupWithoutImage())
+        if (testAudioFilesLoaded() &&
+            testTextureLoading() &&
+            testProjectileCleanupWithoutImage() &&
+            testCheckHighScore() && 
+            testPencilDelete()
+            ) 
         {
             return true;
         }
-        else
+
+        else return false;
+    }
+
+    bool testPencilDelete()
+    {
+        bool test = true;
+
+        std::vector<Pencil> pencils;
+        sf::Texture pencilTex("pencil.png");
+        Player temp;
+
+        //make vector of pencils
+        for (int i = 0 ; i < 10; i++)
         {
-            return false;
+            Pencil newPencil(pencilTex, temp.getPosition());
+            pencils.push_back(newPencil);
+        }
+
+        //remove one by one
+        for (int j = 0; j < 10; j++)
+        {
+            pencils.erase(pencils.begin());
         }
         
+        if (!pencils.empty())
+        {
+            test = false; 
+            std::cout << "Pencil delete failed" << std::endl;
+        }
 
+        else
+        {
+            std::cout << "Pencil deletion passed" << std::endl;
+        }
+
+        return test;
     }
 
 	//test case for loading audio files
@@ -39,17 +78,14 @@ public:
             {
                 std::cout << "Error: Failed to load audio file: " << file << std::endl;
                 allLoaded = false;
-                return false;
             }
             else
             {
-                std::cout << "Loaded successfully: " << file << std::endl;
-                return true;
+                std::cout << "Audio test loaded successfully: " << file << std::endl;
             }
         }
         return allLoaded;
     }
-
 
 
     bool testTextureLoading() 
@@ -125,5 +161,48 @@ public:
     }
 
 
-};
+    bool testCheckHighScore() {
 
+
+        std::ofstream file("HighScore.txt");
+
+        file << 40;
+
+        file.close();
+
+        bool test = false;
+
+        int result = checkHighScore(75);
+
+
+
+        std::ifstream verify("HighScore.txt");
+
+        int fileScore;
+
+        verify >> fileScore;
+
+        verify.close();
+
+
+
+        if (result == 75 && fileScore == 75) {
+
+            std::cout << "Check high score test passed: high score was updated correctly.\n";
+
+            test = true;
+
+        }
+
+        else {
+
+            std::cout << "Check high score test failed!\n";
+
+            std::cout << "Returned: " << result << ", File Score: " << fileScore << std::endl;
+
+        }
+        return test;
+
+    }
+
+};

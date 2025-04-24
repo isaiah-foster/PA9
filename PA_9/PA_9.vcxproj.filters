@@ -46,7 +46,7 @@
     <ClInclude Include="background.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ball.hpp">
+    <ClInclude Include="Book.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MiscFunctions.hpp">
