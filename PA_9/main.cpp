@@ -85,6 +85,7 @@ int main()
         return -1; // Exit the program if the font fails to load
     }
 
+
 	sf::Text scoreLabel(font, "Score = 0");
 	scoreLabel.setCharacterSize(50);
 	scoreLabel.setFillColor(sf::Color::Green);
