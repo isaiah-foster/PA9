@@ -12,8 +12,10 @@
 #include "GameOverScreen.hpp"
 
 
+
 int main()
 {
+    
     //Seed random time
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
