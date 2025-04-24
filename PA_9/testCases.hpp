@@ -1,47 +1,30 @@
-#pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Window/Window.hpp>
-#include "menu.hpp"
-#include "player.hpp"
-#include "background.hpp"
-#include "ball.hpp"
-#include "Windows.h"
-#include "MiscFunctions.hpp"
-#include <vector>
-#include <string>
-#include "pencil.hpp"
+#include <iostream>
+#include <SFML/Audio.hpp>
 
-#include "GameOverScreen.hpp"
+bool testAudioFilesLoaded() 
+{
+    std::vector<std::string> audioFiles = {
+        "danceWeapon4.mp3",
+        "track1.mp3",
+        "LaserGunPew.wav",
+        "pencil_hit.mp3",
+        "pencil_hit.mp3"
+    };
 
-class TestCases {
-public:
-    void testFunctions(){
-        testCheckHighScore();
-    }
-
-private:
-    void testCheckHighScore() {
-        
-        std::ofstream file("HighScore.txt");
-        file << 40;
-        file.close();
-
-        
-        int result = checkHighScore(75);
-
-        
-        std::ifstream verify("HighScore.txt");
-        int fileScore;
-        verify >> fileScore;
-        verify.close();
-
-        
-        if (result == 75 && fileScore == 75) {
-            std::cout << "Test passed: high score was updated correctly.\n";
+    bool allLoaded = true;
+    for (const auto& file : audioFiles) 
+    {
+        sf::Music testMusic;
+        if (!testMusic.openFromFile(file)) 
+        {
+            std::cerr << "Error: Failed to load audio file: " << file << std::endl;
+            allLoaded = false;
         }
-        else {
-            std::cout << "Test failed!\n";
-            std::cout << "Returned: " << result << ", File Score: " << fileScore << std::endl;
+        else 
+        {
+            std::cout << "Loaded successfully: " << file << std::endl;
         }
     }
-};
+
+    return allLoaded;
+}

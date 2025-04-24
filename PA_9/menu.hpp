@@ -8,8 +8,7 @@
 class Menu
 {
 public:
-
-
+    
     Menu(const sf::Texture& backgroundTexture, const sf::Texture& playerTexture, const sf::Font& font, sf::Vector2u windowSize)
         : background(backgroundTexture), player({ (float)windowSize.x, (float)windowSize.y }, playerTexture),
         gameOverText(font, "BOOK BLASTER", 100), escapeCont(font, "Press Space to Play" ), menuCont(font, "", 50)

@@ -10,6 +10,7 @@
 #include <string>
 #include "pencil.hpp"
 #include "GameOverScreen.hpp"
+#include "testCases.hpp"
 
 
 
@@ -116,6 +117,13 @@ int main()
     gameMusic.setLooping(true);
 
 
+
+
+
+    if (!testAudioFilesLoaded()) {
+        std::cerr << "One or more audio files failed to load. Exiting." << std::endl;
+        return -1;
+    }
 
     while (window.isOpen())
     {
