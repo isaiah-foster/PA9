@@ -62,7 +62,7 @@ public:
             book3.loadFromFile("Book3.png") &&
             pencil.loadFromFile("pencil.png") &&
             playerTex.loadFromFile("player.png") &&
-            backgroundTex.loadFromFile("background.png");
+            backgroundTex.loadFromFile("BackDrop.png");
 
         if (allLoaded) 
         {
