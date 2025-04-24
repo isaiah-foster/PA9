@@ -8,7 +8,7 @@ class GameOverScreen {
 public:
     GameOverScreen(const sf::Texture& backgroundTexture, const sf::Texture& playerTexture, const sf::Font& font, sf::Vector2u windowSize)
         : background(backgroundTexture), player({ (float)windowSize.x, (float)windowSize.y }, playerTexture), 
-        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press ESCAPE To Play Again", 50), menuCont(font, "Or Press E to Exit", 50), credits(font, "Credits: Dylan Hale, Isaiah Foster, Aaron Sanchez and Justin Scofield", 20)
+        gameOverText(font, "GAME OVER", 100), escapeCont(font, "Press ESCAPE To Play Again", 50), menuCont(font, "Or Press E to Exit", 50), credits(font, "Credits: \nDylan Hale \nIsaiah Foster \nAaron Sanchez \nJustin Scofield", 20)
     {
         //set up the background
         background.setPosition({ 0,0 });
@@ -47,7 +47,8 @@ public:
 
         credits.setFillColor(sf::Color::Red);
         credits.setOrigin({ credits.getGlobalBounds().size.x / 2, credits.getGlobalBounds().size.y / 2 });
-        credits.setPosition({ (float)windowSize.x / 4.8f, (float)windowSize.y / 2.0f });
+        credits.setPosition({ (float)windowSize.x / 4.0f, (float)windowSize.y / 2.0f });
+
 
     }
 
