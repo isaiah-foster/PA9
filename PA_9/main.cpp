@@ -9,8 +9,7 @@
 #include <vector>
 #include <string>
 #include "pencil.hpp"
-#include "GameOverScreen.hpp"
-#include "testCases.hpp"
+#include "GameOverInherited.hpp"
 
 int main()
 {
