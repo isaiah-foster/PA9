@@ -119,11 +119,13 @@ int main()
 
 
 
-
+    //test audio
     if (!testAudioFilesLoaded()) {
         std::cerr << "One or more audio files failed to load. Exiting." << std::endl;
         return -1;
     }
+
+
 
     while (window.isOpen())
     {
