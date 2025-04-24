@@ -140,10 +140,7 @@ int main()
         //spawn in a new pencil if pencil is shot
 		if (pencils[pencils.size() - 1].getIsShooting() == true && pencil_spawn_clock.getElapsedTime().asMilliseconds() >= pencilSpawnRate)
 		{
-            if (pencils.size() >= 25)
-            {
-                pencils.erase(pencils.begin()); // Remove the first (oldest) pencil
-            }
+            
 
 			Pencil newPencil(pencilTex, player.getPosition());
 			pencils.push_back(newPencil);
@@ -168,11 +165,13 @@ int main()
 			}
         }
         
+
+
 		//update all pencils
         for (auto& pencil : pencils)
         {
 			pencil.update(window, laserSound, player);
-            if (pencil.getIsHit() || pencil.getPosition().y < 0)
+            if ((pencil.getIsHit() || pencil.getPosition().y < 0) && pencils.size() > 2)
             {
 				//remove the pencil from the vector if it hits a book
                 pencils.erase(std::remove_if(pencils.begin(), pencils.end(), [](const Pencil& p) { return p.getIsHit() || p.getPosition().y < 0; }), pencils.end());
