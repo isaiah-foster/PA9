@@ -17,9 +17,7 @@
 int main()
 {
 
-    //run test cases
-	TestCases test;
-	test.testAll();
+    
     
     //Seed random time
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -121,6 +119,13 @@ int main()
     gameMusic.setLooping(true);
 
 
+
+
+
+
+    //run test cases before gameloop begins
+    TestCases test;
+    test.testAll();
 
 
     while (window.isOpen())
